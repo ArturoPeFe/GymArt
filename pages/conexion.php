@@ -1,34 +1,21 @@
 <?php
-namespace Clases;
-use PDO;
-use PDOException;
+    $host="localhost";
+    $bd="gimnasio"; 
+    $user="root";
+    $dsn = "mysql:host=$host; dbname=$bd; charset=utf8mb4";
+    $error=false;
+    $mensaje;
 
-class Conexion{
-    private $host;
-    private $bd;
-    private $user;
-    private $pass;
-    private $dsn;
-    protected $conexion;
-
-    public function __construct(){
-        $this->host = "localhost";
-        $this->bd = "gimnasio";
-        $this->user = "root";
-        $this->pass;
-        $this->dsn = "mysql:host={$this->host}; dbname={$this->bd}; charset=utf8mb4";
-        $this->crearConexion();
+    try{
+        $bdGym = new PDO($dsn, $user);
+        $bdGym -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    }catch(PDOException $e){
+        $mensaje = $e->getMessage();
+        $error = true;
     }
 
-    public function crearConexion(){
-        try {
-            $this->conexion = new PDO($this->dsn, $this->user);
-            $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("Error en la conexión: mensaje: " . $e->getMessage());
-        }
-        return $this->conexion;
+    if($error){
+        echo "<h2 style='text-align:center;'>A ocurrido un error al intentar conectar con la base de datos.<h2>";
     }
-}
 
 ?>
