@@ -1,0 +1,76 @@
+
+/* Menú superior -----------------------------------*/
+#navbar *{
+    display: inline-block;
+    z-index: 1;
+}
+
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(31, 31, 31);
+}
+
+#menu{
+    text-align: center;
+}
+
+#menu * {
+    text-decoration: none;
+}
+
+#logo {
+    width: max-content;
+
+}
+
+#logo * h2 {
+    color: white;
+    width: max-content;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 15px 0px;
+}
+
+#opcionesMenu{
+    margin: auto;
+}
+
+#opcionesMenu *{
+    color: white;
+}
+
+#opcionesMenu {
+    width: 75%;
+}
+
+#opcionesMenu ul li{
+    padding-right: 3vw;
+}
+
+#opcionesMenu ul li a{
+    border-bottom: 2px solid transparent;
+}
+
+#opcionesMenu ul li a:hover{
+    border-bottom: 2px solid #FF5733;
+}
+
+#usuarios button{
+    width: 90px;
+    height: 40px;
+}
+
+#usuarios button {
+    background-color: black;
+    border-radius: 10px;
+    border:1px solid #FF5733;
+}
+
+#usuarios * a {
+    
+    font-weight: 700;
+    font-size: 16px;
+}

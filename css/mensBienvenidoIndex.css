@@ -1,0 +1,9 @@
+#bienvenido{
+    text-align: center;
+    margin-top: 80px;
+}
+
+#bienvenido h1{
+    font-weight: 700;
+    font-size: 50px;
+}
