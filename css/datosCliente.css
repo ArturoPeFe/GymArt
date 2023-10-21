@@ -1,0 +1,31 @@
+#divDatos{
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+#divDatos > div{
+    height: 500px;
+    width: 60vw;
+    padding: 50px;
+    margin: auto;
+    margin-top: 250px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#datos1 > *, #datos2 > *, #datos3 > *, #datos4 > *{
+    border-bottom: 1px solid black;
+    margin: 25px 10px;
+}
+
+#boton *{
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+}
+

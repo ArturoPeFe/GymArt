@@ -3,7 +3,7 @@
     height: 100vh;
     width: 100%;
     object-fit: cover;
-    --opacidad-negro: 0.8;
+    --opacidad-negro: 0.7;
     background-image: linear-gradient(rgba(0, 0, 0, var(--opacidad-negro)), rgba(0, 0, 0, var(--opacidad-negro))), url(../assets/img/bg/bg-cta.jpg);
     background-position: top;
     background-repeat: no-repeat;
