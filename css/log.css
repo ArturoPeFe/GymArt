@@ -54,3 +54,28 @@ button{
     height: 60px;
     width: 150px;
 }
+
+@media screen and (max-width: 760px) {
+
+    #img{
+        height: 70vh;
+    }
+
+    fieldset{
+        margin-bottom: 0px !important;
+    }
+
+    #formAcceso form{
+        height: 235px;
+        width:80vw;
+    }
+
+    label{
+        font-size: 15px;
+    }
+
+    #boton button{
+        width: 20vw !important;
+        height: 5vh !important;
+    }
+}

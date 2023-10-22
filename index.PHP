@@ -54,8 +54,8 @@
     </p>
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col">
-        <div class="card h-100 padd">
-          <h1><i class="bi bi-people-fill"></i></h1>
+        <div class="card h-100 ">
+          <h1 class="mTop"><i class="bi bi-people-fill"></i></h1>
           <div class="card-body">
             <h4 class="card-title naranja w700">Entrenadores calificados</h4>
             <p class="card-text">Nuestros entrenadores tienen años de experiencia en diversos tipos de fitness y deportes.</p>
@@ -63,8 +63,8 @@
         </div>
       </div>
       <div class="col">
-        <div class="card h-100 padd">
-          <h1><i class="bi bi-hand-thumbs-up-fill"></i></h1>
+        <div class="card h-100 ">
+          <h1 class="mTop"><i class="bi bi-hand-thumbs-up-fill"></i></h1>
           <div class="card-body">
             <h4 class="card-title naranja w700">Enfoque individual</h4>
             <p class="card-text">Cada cliente de Intense tiene un programa personalizado de entrenamiento y nutrición.</p>
@@ -72,8 +72,8 @@
         </div>
       </div>
       <div class="col">
-        <div class="card h-100 padd">
-          <h1><i class="fa-solid fa-dumbbell"></i></h1>
+        <div class="card h-100 ">
+          <h1 class="mTop"><i class="fa-solid fa-dumbbell"></i></h1>
           <div class="card-body">
             <h4 class="card-title naranja w700">Equipo de fitness moderno</h4>
             <p class="card-text">Cooperamos con los principales proveedores de equipos de fitness para brindarle resultados superiores.</p>
@@ -84,49 +84,67 @@
   </div>
   <div id="fondoCarrusel">
     <div id="tamCarrusel">
-      <div id="carouselExampleIndicators" class="carousel slide">
+      <div id="carrusel" class="carousel slide">
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carrusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="row row-cols-1 row-cols-md-2">
               <div class="col sinSep">
-                <img src="./assets/img/bg/bg-5.jpg" class="d-block w-100" alt="Imagen 1">
+                <img src="./assets/img/bg/gallery-01.png" class="d-block w-100" alt="Imagen 1">
+                <div class="carousel-caption">
+                  <p>FITNESS</p>
+                </div>
               </div>
               <div class="col sinSep sHidden1">
-                <img src="./assets/img/bg/bg-cta.jpg" class="d-block w-100" alt="Imagen 2">
+                <img src="./assets/img/bg/gallery-02.jpg" class="d-block w-100" alt="Imagen 2">
+                <div class="carousel-caption">
+                  <p>FITNESS</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="carousel-item active">
+          <div class="carousel-item">
             <div class="row row-cols-1 row-cols-md-2">
               <div class="col sinSep">
-                <img src="./assets/img/bg/bg-5.jpg" class="d-block w-100" alt="Imagen 1">
+                <img src="./assets/img/bg/gallery-03.jpg" class="d-block w-100 opacidad" alt="Imagen 1">
+                <div class="carousel-caption">
+                  <p>BODYBUILDING</p>
+                </div>
               </div>
               <div class="col sinSep sHidden1">
-                <img src="./assets/img/bg/bg-cta.jpg" class="d-block w-100" alt="Imagen 2">
+                <img src="./assets/img/bg/gallery-04.jpg" class="d-block w-100" alt="Imagen 2">
+                <div class="carousel-caption">
+                  <p>BODYBUILDING</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="carousel-item active">
+          <div class="carousel-item">
             <div class="row row-cols-1 row-cols-md-2">
               <div class="col sinSep">
-                <img src="./assets/img/bg/bg-5.jpg" class="d-block w-100" alt="Imagen 1">
+                <img src="./assets/img/bg/gallery-05.jpg" class="d-block w-100" alt="Imagen 1">
+                <div class="carousel-caption">
+                  <p>CROSSFIT</p>
+                </div>
               </div>
               <div class="col sinSep sHidden1">
-                <img src="./assets/img/bg/bg-cta.jpg" class="d-block w-100" alt="Imagen 2">
+                <img src="./assets/img/bg/gallery-06.jpg" class="d-block w-100" alt="Imagen 2">
+                <div class="carousel-caption">
+                  <p>CROSSFIT</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
