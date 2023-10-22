@@ -39,12 +39,12 @@ $datos = $exec->fetch(PDO::FETCH_OBJ);
         <div id="menu">
             <div id="logo">
                 <a href="../index.php">
-                    <h2>Gym<span class="naranja">Art</span></h2>
+                    <h2 class="w700">Gym<span class="naranja">Art</span></h2>
                 </a>
             </div>
             <div id="opcionesMenu">
                 <ul>
-                    <li><a href="/Proyecto/index.php">Inicio </a> </li>
+                    <li><a href="/Proyecto/">Inicio </a> </li>
                     <li><a href="#">Galería</a></li>
                     <li><a href="#">Valoraciones</a></li>
                     <li><a href="#">Miembros</a></li>

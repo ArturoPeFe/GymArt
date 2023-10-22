@@ -6,7 +6,7 @@
 }
 
 #divDatos > div{
-    height: 500px;
+    height: max-content;
     width: 60vw;
     padding: 50px;
     margin: auto;

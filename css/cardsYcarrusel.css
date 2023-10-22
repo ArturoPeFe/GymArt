@@ -1,0 +1,37 @@
+#bienvenido{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    margin-top: 80px;
+}
+
+#bienvenido > h1{
+    font-weight: 700;
+    font-size: 50px;
+}
+
+#bienvenido > p, #bienvenido * hr{
+    margin-bottom: 40px;
+}
+
+#bienvenido * hr{
+    margin: 40px auto 80px auto;
+}
+hr{
+    width: 200px;
+}
+
+.padd{
+    padding: 20px !important;
+}
+
+#fondoCarrusel{
+    background-color: gray;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#tamCarrusel{
+    margin: auto;
+    width: 50vw;
+}
