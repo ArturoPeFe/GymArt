@@ -49,7 +49,7 @@
       <hr class="naranja border-3 opacity-75">
     </div>
     <p>
-      ¡Bienvenidos al sitio web de Intense Gym! Esperamos que aprecie nuestros servicios y oportunidades que ofrecemos a nuestros clientes leales y potenciales.
+      ¡Bienvenidos al sitio web de GymArt! Esperamos que aprecie nuestros servicios y oportunidades que ofrecemos a nuestros clientes leales y potenciales.
       Éstos son algunos de ellos:
     </p>
     <div class="row row-cols-1 row-cols-md-3 g-4">
