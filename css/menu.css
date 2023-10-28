@@ -63,6 +63,15 @@
 
 @media screen and (max-width: 1100px) {
     #opcionesMenu {
+        width: 60%;
+    }
+    #opcionesMenu ul li{
+        padding-right: 10px;
+    }
+}
+
+@media screen and (max-width: 790px) {
+    #opcionesMenu {
         display: none;
     }
 
