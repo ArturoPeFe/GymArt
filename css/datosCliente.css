@@ -10,7 +10,7 @@
     width: 60vw;
     padding: 50px;
     margin: auto;
-    margin-top: 250px;
+    margin-top: 200px;
     background-color: white;
     border-radius: 10px;
     display: flex;
@@ -32,12 +32,15 @@
 @media screen and (max-width: 760px) {
 
     #img{
-        height: 1300px !important;
+        height: 1000px !important;
     }
 
     #divDatos > div{
         width: 80vw;
     }
 
+    #divDatos > div{
+        margin-top: 80px;
+    }
 
 }

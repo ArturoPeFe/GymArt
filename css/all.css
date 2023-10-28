@@ -32,3 +32,7 @@ body *{
 .w900{
     font-weight: 900 !important;
 }
+
+.pagActiva{
+    border-bottom: 2px solid #FF5733 !important;
+}

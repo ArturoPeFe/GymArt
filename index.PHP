@@ -27,13 +27,13 @@ $_SESSION['credencialesErroneas'] = False
   <nav id="menuPc">
     <div id="menu">
       <div id="logo">
-        <a href="/Proyecto/">
+        <a href="./">
           <h2 class="w700">Gym<span class="naranja">Art</span></h2>
         </a>
       </div>
       <div id="opcionesMenu">
         <ul>
-          <li><a href="/Proyecto/">Inicio </a> </li>
+          <li><a class="pagActiva" href="/Proyecto/">Inicio </a> </li>
           <li><a href="#">Galería</a></li>
           <li><a href="#">Valoraciones</a></li>
           <li><a href="#">Miembros</a></li>
