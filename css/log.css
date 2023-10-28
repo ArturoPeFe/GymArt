@@ -41,14 +41,14 @@ label{
     font-size: 30px;
 }
 
-#boton{
+#divBoton{
     width: 80%;
     margin: auto;
     display: flex;
     justify-content: center;
 }
 
-button{
+#boton{
     background-color: #FF5733 !important;
     border: none !important;
     height: 60px;
@@ -58,7 +58,7 @@ button{
 @media screen and (max-width: 760px) {
 
     #img{
-        height: 70vh;
+        height: 80vh;
     }
 
     fieldset{
@@ -74,8 +74,11 @@ button{
         font-size: 15px;
     }
 
-    #boton button{
-        width: 20vw !important;
-        height: 5vh !important;
+    #boton{
+        background-color: #FF5733 !important;
+        border: none !important;
+        height: 50px;
+        width: 100px;
+        border-radius: 10px;
     }
 }

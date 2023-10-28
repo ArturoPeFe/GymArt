@@ -1,0 +1,30 @@
+footer{
+    background-color: rgb(31, 31, 31);
+    height: 300px;
+    padding-top: 40px;
+}
+
+footer a{
+    text-decoration: none;
+    color: #FF5733;
+}
+
+#redes{
+    text-align: center;
+}
+
+#redes a{
+    margin:10px;
+
+}
+
+#infoFooter {
+    margin-top: 20px;
+    text-align: center;
+    color: gray;
+    text-decoration: none;
+}
+
+#infoFooter a {
+    color: gray !important;
+}

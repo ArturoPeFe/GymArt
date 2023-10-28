@@ -1,24 +1,25 @@
-#bienvenido {
+#precios {
     width: 80%;
     margin: auto;
+    margin-bottom: 80px;
     text-align: center;
     margin-top: 80px;
 }
 
-#bienvenido>h1 {
+#precios>h2 {
     font-weight: 700;
-    font-size: 50px;
+    font-size: 35px;
 }
 
-#bienvenido>p,
-#bienvenido * hr {
+#precios * hr,
+#precios > p {
     margin-bottom: 40px;
 }
 
-#bienvenido * hr {
+#precios * hr {
     margin: 40px auto 80px auto;
 }
 
-hr {
-    width: 200px;
+#precios .card{
+    border: 0px !important;
 }

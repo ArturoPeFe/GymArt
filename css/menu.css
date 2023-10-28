@@ -1,8 +1,12 @@
 
 /* Menú superior -----------------------------------*/
-#navbar *{
+#menuMovil{
+    display: none;
+}
+
+#menuPc *{
     display: inline-block;
-    z-index: 1;
+    z-index: 999;
 }
 
 #menu {
@@ -57,19 +61,31 @@
     border-bottom: 2px solid #FF5733;
 }
 
-#usuarios button{
-    width: 90px;
-    height: 40px;
-}
+@media screen and (max-width: 1100px) {
+    #opcionesMenu {
+        display: none;
+    }
 
-#usuarios button {
-    background-color: black;
-    border-radius: 10px;
-    border:1px solid #FF5733;
-}
+    #acceso{
+        display: none;
+    }
 
-#usuarios * a {
-    
-    font-weight: 700;
-    font-size: 16px;
+    #menuPc{
+        display: none;
+    }
+
+    #menuMovil{
+        display: initial;
+        background-color: rgb(31, 31, 31) !important;
+    }
+
+    #offcanvasDarkNavbar{
+        background-color: rgb(31, 31, 31) !important;
+    }
+
+    #offcanvasDarkNavbarLabel a{
+        color: white;
+        text-decoration: none;
+    }
+
 }

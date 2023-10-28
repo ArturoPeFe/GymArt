@@ -1,41 +1,12 @@
-#bienvenido {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    margin-top: 80px;
-}
-
-#bienvenido>h1 {
-    font-weight: 700;
-    font-size: 50px;
-}
-
-#bienvenido>p,
-#bienvenido * hr {
-    margin-bottom: 40px;
-}
-
-#bienvenido * hr {
-    margin: 40px auto 80px auto;
-}
-
-hr {
-    width: 200px;
-}
 
 .mTop {
     margin-top: 10px;
 }
 
-#fondoCarrusel {
-    margin-top: 100px;
-    margin-bottom: 100px;
-}
-
 #tamCarrusel {
     margin: auto;
-    margin-bottom: 50px;
-    height: 30vh;
+    margin: 100px 0px;
+    height: max-content;
 }
 
 .sinSep {
