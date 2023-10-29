@@ -1,0 +1,107 @@
+#fondo {
+    height: 45vh;
+    width: 100%;
+    object-fit: cover;
+    --opacidad-negro: 0.7;
+    background-image: linear-gradient(rgba(0, 0, 0, var(--opacidad-negro)), rgba(0, 0, 0, var(--opacidad-negro))), url(../assets/img/bg/slide2.jpg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+/* Mensaje principal sobre fondo ---------------------------------- */
+#mensPrincipal {
+    width: 100%;
+    position: absolute;
+    top: 20vh;
+    text-align: center;
+    color: white;
+}
+
+#mensPrincipal div {
+    width: 800px;
+    margin: auto;
+}
+
+#mensPrincipal h1 {
+    font-weight: 700;
+    font-size: 60px;
+}
+
+#cuerpo {
+    margin: 60px 0px;
+    text-align: center;
+}
+
+#cuerpo * hr {
+    margin: 40px auto 80px auto;
+}
+
+hr {
+    width: 200px;
+}
+
+#mapa{
+    width: max-content;
+    margin: 0px auto 80px auto;
+}
+
+#mapa iframe{
+    width: 70vw;
+}
+
+@media screen and (max-width: 1100px) {
+
+    #mensPrincipal {
+        width: 100%;
+        position: absolute;
+        top: 20vh;
+        text-align: center;
+        color: white;
+    }
+
+    #mensPrincipal div {
+        width: 70vw;
+        margin: auto;
+    }
+
+    #mensPrincipal h1 {
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+}
+
+@media screen and (max-width: 760px) {
+
+    #mapa iframe{
+        height: 300px;
+    }
+
+}
+
+@media screen and (max-width: 499px) {
+
+    #mensPrincipal {
+        width: 100%;
+        position: absolute;
+        top: 20vh;
+        text-align: center;
+        color: white;
+    }
+
+    #mensPrincipal div {
+        width: 250px;
+        margin: auto;
+    }
+
+    #mensPrincipal h1 {
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+    #mapa iframe{
+        height: 300px;
+    }
+}

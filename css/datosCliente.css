@@ -11,7 +11,7 @@
     padding: 50px;
     margin: auto;
     margin-top: 200px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -23,8 +23,11 @@
     margin: 25px 10px;
 }
 
-#boton *{
+#boton{
     border-radius: 10px;
+}
+
+#boton *{
     text-decoration: none;
     color: white;
 }

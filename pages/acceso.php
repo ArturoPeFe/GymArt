@@ -37,7 +37,7 @@ if (isset($_SESSION['user'])) {
     <!DOCTYPE html>
 
     <head>
-      <title>Gimnasio</title>
+      <title>Acceso</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" type="text/css" href="../css/all.css">
@@ -56,21 +56,22 @@ if (isset($_SESSION['user'])) {
       <nav id="menuPc">
         <div id="menu">
           <div id="logo">
-            <a href="/Proyecto/">
+            <a href="../">
               <h2 class="w700">Gym<span class="naranja">Art</span></h2>
             </a>
           </div>
           <div id="opcionesMenu">
             <ul>
-              <li><a href="/Proyecto/">Inicio </a> </li>
+              <li><a href="../">Inicio </a> </li>
               <li><a href="#">Galería</a></li>
               <li><a href="#">Valoraciones</a></li>
               <li><a href="#">Miembros</a></li>
-              <li><a href="#">Contacto</a></li>
+              <li><a href="../pages/contacto.php">Contacto</a></li>
+              <li><a class="pagActiva" href="../pages/acceso.php">Acceder</a></li>
             </ul>
           </div>
           <div id="acceso">
-            <a href="./pages/acceso.php" class="naranja">
+            <a href="../pages/acceso.php" class="naranja">
               <h5><i class="bi bi-person-circle"></i></h5>&nbsp
               <p>
                 <?php
@@ -85,14 +86,14 @@ if (isset($_SESSION['user'])) {
       <!-- Menú de móvil -->
       <nav id="menuMovil" class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand w700" href="/Proyecto/">Gym<span class="naranja">Art</span></a>
+          <a class="navbar-brand w700" href="../">Gym<span class="naranja">Art</span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-                <a href="./pages/acceso.php"><i class="bi bi-person-circle"></i>
+                <a href="../pages/acceso.php"><i class="bi bi-person-circle"></i>
                   <?php
                   if (isset($_SESSION['nombre']))  echo $_SESSION['nombre'];
                   else echo 'Inicia Sesión';
@@ -104,7 +105,7 @@ if (isset($_SESSION['user'])) {
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a class="nav-link text-center" aria-current="page" href="/Proyecto/">Inicio</a>
+                  <a class="nav-link text-center" aria-current="page" href="../">Inicio</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-center" href="#">Galería</a>
@@ -116,7 +117,7 @@ if (isset($_SESSION['user'])) {
                   <a class="nav-link text-center" href="#">Miembros</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-center" href="#">Contacto</a>
+                  <a class="nav-link text-center" href="../pages/contacto.php">Contacto</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active text-center naranja" href="../pages/acceso.php">Acceder</a>

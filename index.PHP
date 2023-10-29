@@ -4,7 +4,7 @@ $_SESSION['credencialesErroneas'] = False
 <!DOCTYPE html>
 
 <head>
-  <title>Gimnasio</title>
+  <title>GymArt</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./css/all.css">
@@ -33,11 +33,12 @@ $_SESSION['credencialesErroneas'] = False
       </div>
       <div id="opcionesMenu">
         <ul>
-          <li><a class="pagActiva" href="/Proyecto/">Inicio </a> </li>
+          <li><a class="pagActiva" href="./">Inicio </a> </li>
           <li><a href="#">Galería</a></li>
           <li><a href="#">Valoraciones</a></li>
           <li><a href="#">Miembros</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="./pages/contacto.php">Contacto</a></li>
+          <li><a href="./pages/acceso.php">Acceder</a></li>
         </ul>
       </div>
       <div id="acceso">
@@ -56,7 +57,7 @@ $_SESSION['credencialesErroneas'] = False
   <!-- Menú de móvil -->
   <nav id="menuMovil" class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand w700" href="/Proyecto/">Gym<span class="naranja">Art</span></a>
+      <a class="navbar-brand w700" href="./">Gym<span class="naranja">Art</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -75,7 +76,7 @@ $_SESSION['credencialesErroneas'] = False
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active text-center naranja" aria-current="page" href="/Proyecto/">Inicio</a>
+              <a class="nav-link active text-center naranja" aria-current="page" href="./">Inicio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center" href="#">Galería</a>
@@ -87,7 +88,7 @@ $_SESSION['credencialesErroneas'] = False
               <a class="nav-link text-center" href="#">Miembros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">Contacto</a>
+              <a class="nav-link text-center" href="./pages/contacto.php">Contacto</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center" href="./pages/acceso.php">Acceder</a>

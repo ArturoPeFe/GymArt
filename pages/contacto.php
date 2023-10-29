@@ -1,36 +1,15 @@
-<?php
-session_start();
-require('./conexion.php');
-
-$email = $_SESSION['user'];
-$consulta = "SELECT * FROM clientes WHERE email = :email";
-$exec = $bdGym->prepare($consulta);
-$exec->bindParam(':email', $email);
-
-try {
-    $exec->execute();
-} catch (PDOException $e) {
-    $error = true;
-    $mensaje = $e->getMessage();
-    $bdGym = null;
-}
-
-$datos = $exec->fetch(PDO::FETCH_OBJ);
-$_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->apellido2;
-
-?>
-
+<?php session_start(); ?>
 <!DOCTYPE html>
+<html>
 
 <head>
-    <title>Datos Usuario</title>
+    <title>Contacto</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/all.css">
     <link rel="stylesheet" type="text/css" href="../css/menu.css">
-    <link rel="stylesheet" type="text/css" href="../css/log.css">
+    <link rel="stylesheet" type="text/css" href="../css/contacto.css">
     <link rel="stylesheet" type="text/css" href="../css/footer.css">
-    <link rel="stylesheet" type="text/css" href="../css/datosCliente.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/2eff857ffa.js" crossorigin="anonymous"></script>
@@ -39,6 +18,7 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
 </head>
 
 <body>
+
     <!-- Menú de pc... -->
     <nav id="menuPc">
         <div id="menu">
@@ -53,8 +33,8 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
                     <li><a href="#">Galería</a></li>
                     <li><a href="#">Valoraciones</a></li>
                     <li><a href="#">Miembros</a></li>
-                    <li><a href="../pages/contacto.php">Contacto</a></li>
-                    <li><a class="pagActiva" href="../pages/acceso.php">Acceder</a></li>
+                    <li><a class="pagActiva" href="../pages/contacto.php">Contacto</a></li>
+                    <li><a href="../pages/acceso.php">Acceder</a></li>
                 </ul>
             </div>
             <div id="acceso">
@@ -104,10 +84,10 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
                             <a class="nav-link text-center" href="#">Miembros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="../pages/contacto.php">Contacto</a>
+                            <a class="nav-link active text-center naranja" href="../pages/contacto.php">Contacto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-center naranja" href="../pages/acceso.php">Acceder</a>
+                            <a class="nav-link text-center" href="../pages/acceso.php">Acceder</a>
                         </li>
                     </ul>
                 </div>
@@ -115,27 +95,26 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
         </div>
     </nav>
 
-    <div id="img"></div>
-    <div id="divDatos">
+    <div id="fondo"></div>
+    <div id="mensPrincipal">
         <div>
-            <h1>Datos Cliente</h1>
-            <div id="datos1" class="row justify-content-center">
-                <div id="nombre" class="col"><strong>Nombre:&nbsp;</strong><?php echo "{$datos->nombre}"; ?></div>
-                <div id="apellidos" class="col"><strong>Apellidos:&nbsp;</strong><?php echo "{$datos->apellido1} {$datos->apellido2}"; ?></div>
-            </div>
-            <div id="datos2" class="row justify-content-center">
-                <div id="dni" class="col"><strong>DNI:&nbsp;</strong><?php echo "{$datos->dni}"; ?></div>
-                <div id="email" class="col"><strong>Email:&nbsp;</strong><?php echo " {$datos->email}"; ?></div>
-                <div id="telefono" class="col"><strong>Teléfono:&nbsp;</strong><?php echo "{$datos->telefono}"; ?></div>
-            </div>
-            <div id="datos3" class="row justify-content-center">
-                <div id="direccion" class="col"><strong>Dirección:&nbsp;</strong><?php echo "{$datos->direccion}"; ?></div>
-            </div>
-            <div id="datos4" class="row justify-content-center">
-                <div id="suscripcion" class="col"><strong>Estado suscripción:&nbsp;</strong><?php echo "{$datos->suscripcion}"; ?></div>
-            </div>
-            <div id="divBoton"><button id="boton" type="submit"><a href="cerrarSesion.php">Cerrar Sesión</a></button></div>
+            <h1>Contacta con Nosotros</h1>
         </div>
+    </div>
+    <div id="cuerpo">
+        <h1>Encuéntranos</h1>
+        <div id="espaciador">
+            <hr class="naranja border-3 opacity-75">
+        </div>
+        <p>Estamos ubicados en el centro de la ciudad y es fácil llegar con cualquier tipo de transporte público.</p>
+        <h3>Ourense</h3>
+        <p>Calle de la calle, 22 - 32003 Ourense</p>
+        <p>Teléfono: 988 123 456</p>
+        <p>Correo: info@ejemplocorreo.com</p>
+    </div>
+
+    <div id="mapa">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11798.175935803689!2d-7.8744937!3d42.3309242!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2ff932917ad993%3A0x5143d80e114ada98!2sC.I.F.P%20A%20Carballeira!5e0!3m2!1ses!2ses!4v1698603128050!5m2!1ses!2ses" width="900" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <footer>
