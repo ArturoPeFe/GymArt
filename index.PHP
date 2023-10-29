@@ -1,4 +1,5 @@
-<?php session_start();
+<?php 
+session_start();
 $_SESSION['credencialesErroneas'] = False;
 
 // Verificar si la sesión ha expirado
@@ -113,7 +114,7 @@ $_SESSION['timeout'] = time() + 600;
     <div>
       <h1>El camino hacia el éxito siempre está en construcción</h1>
     </div>
-    <button>Únete a nosotros</button>
+    <button><a href="./pages/contacto.php">Únete a nosotros</a></button>
   </div>
   <div id="bienvenido">
     <h1>Bienvenido</h1>
