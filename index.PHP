@@ -1,5 +1,15 @@
 <?php session_start();
-$_SESSION['credencialesErroneas'] = False
+$_SESSION['credencialesErroneas'] = False;
+
+// Verificar si la sesión ha expirado
+if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
+  session_unset();
+  session_destroy();
+  header('Location: ../pages/acceso.php');
+}
+
+$_SESSION['timeout'] = time() + 600;
+
 ?>
 <!DOCTYPE html>
 
@@ -263,7 +273,8 @@ $_SESSION['credencialesErroneas'] = False
       <p>988 123 456</p>
       <p>info@ejemplocorreo.com</p>
       <p>Calle de la calle, 22 - 32003 Ourense</p>
-      <a href="#">Aviso Legal</a>
+      <p><a href="#">Aviso Legal</a></p>
+      <a href="#">Acceso Trabajadores</a>
     </div>
   </footer>
 </body>

@@ -2,6 +2,12 @@
 session_start();
 require('./conexion.php');
 
+// Verificar si la sesión ha expirado
+if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
+  session_unset();
+  session_destroy();
+}
+
 if (isset($_SESSION['user'])) {
   header('Location: datosCliente.php');
 } else {
@@ -22,6 +28,9 @@ if (isset($_SESSION['user'])) {
     }
 
     $passObtenida = $exec->fetch(PDO::FETCH_OBJ);
+
+    // Configuración del tiempo de vida de la sesión en segundos
+    $_SESSION['timeout'] = time() + 600;
 
     if ($passObtenida->pass == $pass) {
       if (isset($_SESSION['credencialesErroneas']) && $_SESSION['credencialesErroneas'] == True) $_SESSION['credencialesErroneas'] = False;
@@ -158,7 +167,8 @@ if (isset($_SESSION['user'])) {
           <p>988 123 456</p>
           <p>info@ejemplocorreo.com</p>
           <p>Calle de la calle, 22 - 32003 Ourense</p>
-          <a href="#">Aviso Legal</a>
+          <p><a href="#">Aviso Legal</a></p>
+          <a href="#">Acceso Trabajadores</a>
         </div>
       </footer>
   <?php }

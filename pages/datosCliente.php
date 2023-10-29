@@ -2,6 +2,15 @@
 session_start();
 require('./conexion.php');
 
+// Verificar si la sesión ha expirado
+if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
+    session_unset();
+    session_destroy();
+    header('Location: ../pages/acceso.php');
+}
+
+$_SESSION['timeout'] = time() + 600;
+
 $email = $_SESSION['user'];
 $consulta = "SELECT * FROM clientes WHERE email = :email";
 $exec = $bdGym->prepare($consulta);
@@ -149,7 +158,8 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
             <p>988 123 456</p>
             <p>info@ejemplocorreo.com</p>
             <p>Calle de la calle, 22 - 32003 Ourense</p>
-            <a href="#">Aviso Legal</a>
+            <p><a href="#">Aviso Legal</a></p>
+            <a href="#">Acceso Trabajadores</a>
         </div>
     </footer>
 </body>

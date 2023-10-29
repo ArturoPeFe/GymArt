@@ -1,0 +1,72 @@
+html, body{
+    background-color: rgb(184, 184, 184) !important;
+}
+
+footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+#mensError{
+    width: 90%;
+    margin: 200px auto;
+    text-align: center;
+}
+
+#mensError h1{
+    font-size: 60px;
+}
+
+#mensError h3, #mensError p{
+    margin-bottom: 40px;
+}
+
+#mensError button{
+    background-color: #FF5733;
+    border: 0px;
+    border-radius: 10px;
+    height: 30px;
+    width: 150px;
+}
+
+#mensError button a{
+    text-decoration: none;
+    color: white;
+}
+
+@media screen and (max-width: 540px) {
+
+    #mensError h1{
+        font-size: 50px;
+    }
+    
+    #mensError h3{
+        font-size: 19px;
+    }
+
+    #mensError P{
+        width: 80%;
+        margin: 0px auto 40px auto;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    #mensError{
+        margin: 100px auto;
+    }
+
+    #mensError h1{
+        font-size: 30px;
+    }
+    
+    #mensError h3{
+        font-size: 15px;
+    }
+
+    #mensError P{
+        width: 80%;
+        margin: 0px auto 40px auto;
+    }
+}

@@ -9,8 +9,10 @@
   <link rel="stylesheet" type="text/css" href="../css/all.css">
   <link rel="stylesheet" type="text/css" href="../css/menu.css">
   <link rel="stylesheet" type="text/css" href="../css/footer.css">
+  <link rel="stylesheet" type="text/css" href="../css/404.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <script src="https://kit.fontawesome.com/2eff857ffa.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -88,8 +90,12 @@
       </div>
     </div>
   </nav>
-  <h1 style="margin-top: 100px; margin-left: 40%;">Por aqui no</h1>
-
+  <div id="mensError">
+    <h1 class="w900 naranja">ERROR 404</h1>
+    <h3>Página no encontrada</h3>
+    <p>Parece que la página que buscas no existe o no está disponible...</p>
+    <button><a href="../">Volver a Inicio</a></button>
+  </div>
   <footer>
     <div id="redes">
       <a href="#"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
@@ -101,7 +107,8 @@
       <p>988 123 456</p>
       <p>info@ejemplocorreo.com</p>
       <p>Calle de la calle, 22 - 32003 Ourense</p>
-      <a href="#">Aviso Legal</a>
+      <p><a href="#">Aviso Legal</a></p>
+      <a href="#">Acceso Trabajadores</a>
     </div>
   </footer>
 </body>
