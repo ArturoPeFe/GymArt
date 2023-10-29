@@ -1,4 +1,6 @@
 <?php
+    /*Hay que modificar los datos para la bdd final, estos son para la de Xampp*/
+
     $host="localhost";
     $bd="gimnasio"; 
     $user="root";
