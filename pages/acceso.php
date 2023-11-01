@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('./conexion.php');
+require('../src/conexion.php');
 
 // Verificar si la sesión ha expirado
 if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {

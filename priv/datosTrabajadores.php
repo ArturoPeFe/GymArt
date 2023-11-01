@@ -1,10 +1,32 @@
 <?php
 session_start();
-require('../pages/conexion.php');
+require('../src/conexion.php');
 
-if(!isset($_SESSION['user'])){
+if (!isset($_SESSION['userT'])) {
     session_destroy();
     header('Location: ../priv/accesoTrabajadores.php');
+}
+if (isset($_POST['modificar'])) {
+    $nombre = $_POST['nombre'];
+    $apellido1 = $_POST['apellido1'];
+    $apellido2 = $_POST['apellido2'];
+    $dni = $_POST['dni'];
+    $email = $_POST['emailN'];
+
+    $update = "UPDATE trabajadores SET nombre=:nom,apellido1=:ap1,apellido2=:ap2,email=:email WHERE dni=:dni";
+    $exec = $bdGym->prepare($update);
+    $exec->bindParam(':dni', $dni);
+    $exec->bindParam(':nom', $nombre);
+    $exec->bindParam(':ap1', $apellido1);
+    $exec->bindParam(':ap2', $apellido2);
+    $exec->bindParam(':email', $email);
+    try {
+        $exec->execute();
+    } catch (PDOException $e) {
+        $error = true;
+        $mensaje = $e->getMessage();
+        $bdGym = null;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +51,7 @@ if(!isset($_SESSION['user'])){
                     <h2 class="w700">Gym<span class="naranja">Art</span> Trabajadores</h2>
                 </a>
             </div>
-            <a href="../pages/cerrarSesion.php" id="salir">Salir</a>
+            <a href="../src/cerrarSesion.php" id="salir">Salir</a>
         </div>
     </nav>
     <!-- Opciones... -->
@@ -44,12 +66,112 @@ if(!isset($_SESSION['user'])){
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body text-center">
                         <p><a href="../priv/datosClientes.php">Consulta/Modificación Clientes</a></p>
-                        <p><a href="../priv/datosTrabajadores.php">Consulta/Modificación Trabajadores</a></p>
-                        <p><a href="../priv/altas.php">Alta usuarios</a></p>
+                        <p><a href="../priv/altaClient.php">Alta Cliente</a></p>
+                        <p><a href="../priv/datosTrabajadores.php">Consulta/Modificación Trabajador</a></p>
+                        <p><a href="../priv/altaTrab.php">Alta Trabajador</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Datos búsqueda -->
+    <div id="formBusqueda">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <div class="mb-3">
+                <select class="form-select" id="opcion" name="opcion">
+                    <option selected disabled>Tipo de búsqueda</option>
+                    <option value="dni">DNI</option>
+                    <option value="email">Email</option>
+                </select><br>
+                <input type="text" class="form-control" id="datoEntrada" name="datoEntrada" aria-describedby="emailHelp">
+            </div>
+            <button type="submit" class="btn btn-primary" id="buscar" name="buscar">Buscar</button>
+            <button type="clear" class="btn btn-primary" id="limpiar" name="limpiar">Limpiar</button>
+        </form>
+    </div>
+    <!-- Mostrar datos -->
+    <div id="datos">
+        <?php
+        if (isset($_POST['modificar'])) {
+            echo '<p style="margin-top: 20px;text-align: center;">Usuario actualizado</p>';
+        }
+        if (isset($_POST['buscar'])) {
+            if (!isset($_POST['opcion'])) {
+                echo '<p style="margin-top: 20px;text-align: center;color: red;">No has seleccionado tipo de búsqueda</p>';
+            } elseif (isset($_POST['opcion']) && $_POST['datoEntrada'] == '') {
+                echo '<p style="margin-top: 20px;text-align: center;color: red;">El valor introducido no es correcto</p>';
+            } else {
+                if ($_POST['opcion'] == 'dni') {
+                    $dni = $_POST['datoEntrada'];
+                    $consulta = "SELECT * FROM trabajadores WHERE dni = :dni";
+                    $exec = $bdGym->prepare($consulta);
+                    $exec->bindParam(':dni', $dni);
+
+                    try {
+                        $exec->execute();
+                    } catch (PDOException $e) {
+                        $error = true;
+                        $mensaje = $e->getMessage();
+                        $bdGym = null;
+                    }
+
+                    $datos = $exec->fetch(PDO::FETCH_OBJ);
+                } elseif ($_POST['opcion'] == 'email') {
+                    $email = $_POST['datoEntrada'];
+                    $consulta = "SELECT * FROM trabajadores WHERE email = :email";
+                    $exec = $bdGym->prepare($consulta);
+                    $exec->bindParam(':email', $email);
+
+                    try {
+                        $exec->execute();
+                    } catch (PDOException $e) {
+                        $error = true;
+                        $mensaje = $e->getMessage();
+                        $bdGym = null;
+                    }
+
+                    $datos = $exec->fetch(PDO::FETCH_OBJ);
+                }
+                if (!$datos) {
+                    echo '<p style="margin-top: 20px;text-align: center; color: red;">El usuario no existe</p>';
+                }
+
+                if ($datos) {
+        ?>
+                    <hr>
+                    <div class="container">
+                        <form id="formModif" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $datos->nombre ?>">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="apellido1" class="form-label">Apellido1</label>
+                                    <input type="text" class="form-control" id="apellido1" name="apellido1" value="<?php echo $datos->apellido1 ?>">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="apellido2" class="form-label">Apellido2</label>
+                                    <input type="text" class="form-control" id="apellido2" name="apellido2" value="<?php echo $datos->apellido2 ?>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="dni" class="form-label">Dni</label>
+                                    <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $datos->dni ?>" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="emailN" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="emailN" name="emailN" value="<?php echo $datos->email ?>">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-danger" id="modificar" name="modificar">Modificar</button>
+                        </form>
+                    </div>
+        <?php }
+            }
+        } ?>
+    </div>
 </body>
+
 </html>

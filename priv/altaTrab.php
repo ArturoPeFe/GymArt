@@ -1,8 +1,8 @@
 <?php
 session_start();
-require('../pages/conexion.php');
+require('../src/conexion.php');
 
-if(!isset($_SESSION['user'])){
+if (!isset($_SESSION['userT'])) {
     session_destroy();
     header('Location: ../priv/accesoTrabajadores.php');
 }
@@ -29,7 +29,7 @@ if(!isset($_SESSION['user'])){
                     <h2 class="w700">Gym<span class="naranja">Art</span> Trabajadores</h2>
                 </a>
             </div>
-            <a href="../pages/cerrarSesion.php" id="salir">Salir</a>
+            <a href="../src/cerrarSesion.php" id="salir">Salir</a>
         </div>
     </nav>
     <!-- Opciones... -->
@@ -38,18 +38,49 @@ if(!isset($_SESSION['user'])){
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Alta usuarios
+                        Alta Trabajador
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body text-center">
                         <p><a href="../priv/datosClientes.php">Consulta/Modificación Clientes</a></p>
+                        <p><a href="../priv/altaClient.php">Alta Cliente</a></p>
                         <p><a href="../priv/datosTrabajadores.php">Consulta/Modificación Trabajador</a></p>
-                        <p><a href="../priv/altas.php">Alta usuarios</a></p>
+                        <p><a href="../priv/altaTrab.php">Alta Trabajador</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container" id="formCrear">
+        <form id="formModif" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="apellido1" class="form-label">Apellido1</label>
+                    <input type="text" class="form-control" id="apellido1" name="apellido1">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="apellido2" class="form-label">Apellido2</label>
+                    <input type="text" class="form-control" id="apellido2" name="apellido2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="dni" class="form-label">Dni</label>
+                    <input type="text" class="form-control" id="dni" name="dni">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="emailN" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="emailN" name="emailN">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="modificar" name="modificar">Crear</button>
+        </form>
+    </div>
 </body>
+
 </html>

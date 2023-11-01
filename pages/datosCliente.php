@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('./conexion.php');
+require('../src/conexion.php');
 
 if(!isset($_SESSION['user'])){
     session_destroy();
@@ -148,7 +148,7 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
             <div id="datos4" class="row justify-content-center">
                 <div id="suscripcion" class="col"><strong>Estado suscripción:&nbsp;</strong><?php echo "{$datos->suscripcion}"; ?></div>
             </div>
-            <div id="divBoton"><button id="boton" type="submit"><a href="cerrarSesion.php">Cerrar Sesión</a></button></div>
+            <div id="divBoton"><button id="boton" type="submit"><a href="../src/cerrarSesion.php">Cerrar Sesión</a></button></div>
         </div>
     </div>
 

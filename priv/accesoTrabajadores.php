@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../pages/conexion.php');
+require('../src/conexion.php');
 
 // Verificar si la sesión ha expirado
 if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
@@ -8,7 +8,7 @@ if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
     session_destroy();
 }
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['userT'])) {
     header('Location: datosClientes.php');
 } else {
     if (isset($_POST['dni'])) {
@@ -34,7 +34,7 @@ if (isset($_SESSION['user'])) {
 
         if ($passObtenida->pass == $pass) {
             if (isset($_SESSION['credencialesErroneas']) && $_SESSION['credencialesErroneas'] == True) $_SESSION['credencialesErroneas'] = False;
-            $_SESSION['user'] = $dni;
+            $_SESSION['userT'] = $dni;
             header('Location: datosClientes.php');
         } else {
             $_SESSION['credencialesErroneas'] = True;
@@ -65,7 +65,7 @@ if (isset($_SESSION['user'])) {
                             <h2 class="w700">Gym<span class="naranja">Art</span> Trabajadores</h2>
                         </a>
                     </div>
-                    <a href="../pages/cerrarSesion.php" id="salir">Salir</a>
+                    <a href="../src/cerrarSesion.php" id="salir">Salir</a>
                 </div>
             </nav>
             <div id="formAcceso">

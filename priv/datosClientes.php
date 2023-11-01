@@ -1,8 +1,8 @@
 <?php
 session_start();
-require('../pages/conexion.php');
+require('../src/conexion.php');
 
-if(!isset($_SESSION['user'])){
+if(!isset($_SESSION['userT'])){
     session_destroy();
     header('Location: ../priv/accesoTrabajadores.php');
 }
@@ -60,7 +60,7 @@ if (isset($_POST['modificar'])) {
                     <h2 class="w700">Gym<span class="naranja">Art</span> Trabajadores</h2>
                 </a>
             </div>
-            <a href="../pages/cerrarSesion.php" id="salir">Salir</a>
+            <a href="../src/cerrarSesion.php" id="salir">Salir</a>
         </div>
     </nav>
     <!-- Opciones... -->
@@ -75,8 +75,9 @@ if (isset($_POST['modificar'])) {
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body text-center">
                         <p><a href="../priv/datosClientes.php">Consulta/Modificación Clientes</a></p>
+                        <p><a href="../priv/altaClient.php">Alta Cliente</a></p>
                         <p><a href="../priv/datosTrabajadores.php">Consulta/Modificación Trabajador</a></p>
-                        <p><a href="../priv/altas.php">Alta usuarios</a></p>
+                        <p><a href="../priv/altaTrab.php">Alta Trabajador</a></p>
                     </div>
                 </div>
             </div>
@@ -163,7 +164,7 @@ if (isset($_POST['modificar'])) {
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
-                                    <label for="dniN" class="form-label">Dni</label>
+                                    <label for="dni" class="form-label">Dni</label>
                                     <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $datos->dni ?>" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -183,7 +184,7 @@ if (isset($_POST['modificar'])) {
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
-                                    <label for="exampleInputPassword4" class="form-label">Suscripción</label>
+                                    <label for="suscripcion" class="form-label">Suscripción</label>
                                     <select class="form-select" id="suscripcion" name="suscripcion">
                                         <option hidden selected><?php echo $datos->suscripcion ?></option>
                                         <option value="Activa">Activa</option>

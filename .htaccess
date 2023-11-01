@@ -1,3 +1,7 @@
 Options -Indexes
 ErrorDocument 403 /error/404.php
 ErrorDocument 404 /error/404.php
+<files conexion.php>
+    order allow,deny 
+    deny from all 
+</files>
