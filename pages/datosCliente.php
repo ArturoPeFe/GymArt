@@ -2,6 +2,11 @@
 session_start();
 require('./conexion.php');
 
+if(!isset($_SESSION['user'])){
+    session_destroy();
+    header('Location: ../pages/acceso.php');
+}
+
 // Verificar si la sesión ha expirado
 if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
     session_unset();
@@ -159,7 +164,7 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
             <p>info@ejemplocorreo.com</p>
             <p>Calle de la calle, 22 - 32003 Ourense</p>
             <p><a href="#">Aviso Legal</a></p>
-            <a href="#">Acceso Trabajadores</a>
+            <a href="../priv/accesoTrabajadores.php">Acceso Trabajadores</a>
         </div>
     </footer>
 </body>

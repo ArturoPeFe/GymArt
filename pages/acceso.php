@@ -168,7 +168,7 @@ if (isset($_SESSION['user'])) {
           <p>info@ejemplocorreo.com</p>
           <p>Calle de la calle, 22 - 32003 Ourense</p>
           <p><a href="#">Aviso Legal</a></p>
-          <a href="#">Acceso Trabajadores</a>
+          <a href="../priv/accesoTrabajadores.php">Acceso Trabajadores</a>
         </div>
       </footer>
   <?php }

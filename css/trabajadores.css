@@ -1,0 +1,35 @@
+#acordeon{
+    margin: auto;
+    margin-top: 80px;
+    width: 400px;
+    
+}
+
+#acordeon  a{
+    text-decoration: none;
+    color: black;
+}
+
+#acordeon a:hover{
+    border-bottom: 1px solid black;
+}
+
+#formBusqueda{
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+#formAcceso{
+    width: 500px;
+    margin: auto;
+    margin-top: 120px;
+}
+
+#salir{
+    position: absolute;
+    right: 50px;
+    top: 20px;
+    color: white;
+}
+
