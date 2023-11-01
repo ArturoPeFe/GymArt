@@ -6,6 +6,25 @@ if (!isset($_SESSION['userT'])) {
     session_destroy();
     header('Location: ../priv/accesoTrabajadores.php');
 }
+
+if (isset($_POST['delete'])) {
+    $dni = $_POST['dni'];
+
+    $exec = $bdGym->prepare("CALL BorrarTrabajador(:dni)");
+
+    $exec->bindParam(':dni', $dni);
+
+    try {
+        $exec->execute();
+    } catch (PDOException $e) {
+        $error = true;
+        $mensaje = $e->getMessage();
+        $bdGym = null;
+    }
+
+    if(!$error){$mensaje='Trabajador borrado con éxito';}
+}
+
 if (isset($_POST['modificar'])) {
     $nombre = $_POST['nombre'];
     $apellido1 = $_POST['apellido1'];
@@ -32,7 +51,7 @@ if (isset($_POST['modificar'])) {
 <!DOCTYPE html>
 
 <head>
-    <title>Trabajadores</title>
+    <title>Datos Trabajadores</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/all.css">
@@ -92,6 +111,7 @@ if (isset($_POST['modificar'])) {
     <!-- Mostrar datos -->
     <div id="datos">
         <?php
+        if(isset($mensaje)){echo '<p style="margin-top: 20px;text-align: center;color: green;">'. $mensaje .'</p>'; unset($mensaje);}
         if (isset($_POST['modificar'])) {
             echo '<p style="margin-top: 20px;text-align: center;">Usuario actualizado</p>';
         }
@@ -165,7 +185,8 @@ if (isset($_POST['modificar'])) {
                                     <input type="text" class="form-control" id="emailN" name="emailN" value="<?php echo $datos->email ?>">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-danger" id="modificar" name="modificar">Modificar</button>
+                            <button type="submit" class="btn btn-warning" id="modificar" name="modificar">Modificar</button>
+                            <button type="submit" class="btn btn-danger" id="delete" name="delete">Borrar Trabajador</button>
                         </form>
                     </div>
         <?php }

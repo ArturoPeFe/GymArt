@@ -41,7 +41,7 @@ if (isset($_POST['modificar'])) {
 <!DOCTYPE html>
 
 <head>
-    <title>Trabajadores</title>
+    <title>Datos Cliente</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/all.css">
@@ -183,7 +183,7 @@ if (isset($_POST['modificar'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="suscripcion" class="form-label">Suscripción</label>
                                     <select class="form-select" id="suscripcion" name="suscripcion">
                                         <option hidden selected><?php echo $datos->suscripcion ?></option>
@@ -193,7 +193,8 @@ if (isset($_POST['modificar'])) {
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-danger" id="modificar" name="modificar">Modificar</button>
+                            <button type="submit" class="btn btn-warning" id="modificar" name="modificar">Modificar</button>
+                            <button type="submit" class="btn btn-danger" id="delete" name="delete">Borrar usuario</button>
                         </form>
                     </div>
         <?php }

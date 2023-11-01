@@ -64,7 +64,6 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
             <div id="opcionesMenu">
                 <ul>
                     <li><a href="../">Inicio </a> </li>
-                    <li><a href="#">Galería</a></li>
                     <li><a href="#">Valoraciones</a></li>
                     <li><a href="#">Miembros</a></li>
                     <li><a href="../pages/contacto.php">Contacto</a></li>
@@ -107,9 +106,6 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link text-center" aria-current="page" href="../">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-center" href="#">Galería</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="#">Valoraciones</a>

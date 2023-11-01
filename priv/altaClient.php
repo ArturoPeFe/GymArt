@@ -6,11 +6,44 @@ if (!isset($_SESSION['userT'])) {
     session_destroy();
     header('Location: ../priv/accesoTrabajadores.php');
 }
+
+if (isset($_POST['crear'])) {
+    $nombre = $_POST['nombre'];
+    $apellido1 = $_POST['apellido1'];
+    $apellido2 = $_POST['apellido2'];
+    $dni = $_POST['dni'];
+    $email = $_POST['email'];
+    $telefono = $_POST['telefono'];
+    $direccion = $_POST['direccion'];
+    $suscripcion = $_POST['suscripcion'];
+
+    $exec = $bdGym->prepare("CALL InsertarCliente(:dni,:nom,:ap1,:ap2,:email,:tel,:direccion,:suscripcion,:pass)");
+
+    $exec->bindParam(':dni', $dni);
+    $exec->bindParam(':nom', $nombre);
+    $exec->bindParam(':ap1', $apellido1);
+    $exec->bindParam(':ap2', $apellido2);
+    $exec->bindParam(':email', $email);
+    $exec->bindParam(':tel', $telefono);
+    $exec->bindParam(':direccion', $direccion);
+    $exec->bindParam(':suscripcion', $suscripcion);
+    $exec->bindParam(':pass', $dni);
+
+    try {
+        $exec->execute();
+    } catch (PDOException $e) {
+        $error = true;
+        $mensaje = $e->getMessage();
+        $bdGym = null;
+    }
+
+    if(!$error){$mensaje='Cliente registrado con éxito';}
+}
 ?>
 <!DOCTYPE html>
 
 <head>
-    <title>Trabajadores</title>
+    <title>Alta Cliente</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/all.css">
@@ -52,7 +85,7 @@ if (!isset($_SESSION['userT'])) {
             </div>
         </div>
     </div>
-
+    <?php if(isset($mensaje)){echo '<p style="margin-top: 20px;text-align: center;color: green;">'. $mensaje .'</p>';} ?>
     <div class="container" id="formCrear">
         <form id="formModif" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <div class="row">
@@ -75,8 +108,8 @@ if (!isset($_SESSION['userT'])) {
                     <input type="text" class="form-control" id="dni" name="dni" required>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="emailN" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="emailN" name="emailN" required>
+                    <label for="emai" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="telefono" class="form-label">Teléfono</label>
@@ -90,7 +123,7 @@ if (!isset($_SESSION['userT'])) {
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 mb-3">
+                <div class="col-md-2 mb-3">
                     <label for="suscripcion" class="form-label">Suscripción</label>
                     <select class="form-select" id="suscripcion" name="suscripcion" required>
                         <option hidden selected></option>
@@ -100,7 +133,7 @@ if (!isset($_SESSION['userT'])) {
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" id="modificar" name="modificar">Crear</button>
+            <button type="submit" class="btn btn-primary" id="crear" name="crear">Crear</button>
         </form>
     </div>
 </body>

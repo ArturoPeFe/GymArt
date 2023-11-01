@@ -6,11 +6,38 @@ if (!isset($_SESSION['userT'])) {
     session_destroy();
     header('Location: ../priv/accesoTrabajadores.php');
 }
+
+if (isset($_POST['crear'])) {
+    $nombre = $_POST['nombre'];
+    $apellido1 = $_POST['apellido1'];
+    $apellido2 = $_POST['apellido2'];
+    $dni = $_POST['dni'];
+    $email = $_POST['email'];
+
+    $exec = $bdGym->prepare("CALL InsertarTrabajador(:dni,:nom,:ap1,:ap2,:email,:pass)");
+
+    $exec->bindParam(':dni', $dni);
+    $exec->bindParam(':nom', $nombre);
+    $exec->bindParam(':ap1', $apellido1);
+    $exec->bindParam(':ap2', $apellido2);
+    $exec->bindParam(':email', $email);
+    $exec->bindParam(':pass', $dni);
+
+    try {
+        $exec->execute();
+    } catch (PDOException $e) {
+        $error = true;
+        $mensaje = $e->getMessage();
+        $bdGym = null;
+    }
+
+    if(!$error){$mensaje='Trabajador registrado con éxito';}
+}
 ?>
 <!DOCTYPE html>
 
 <head>
-    <title>Trabajadores</title>
+    <title>Alta Trabajadores</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/all.css">
@@ -52,6 +79,7 @@ if (!isset($_SESSION['userT'])) {
             </div>
         </div>
     </div>
+    <?php if(isset($mensaje)){echo '<p style="margin-top: 20px;text-align: center;color: green;">'. $mensaje .'</p>';} ?>
     <div class="container" id="formCrear">
         <form id="formModif" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <div class="row">
@@ -75,10 +103,10 @@ if (!isset($_SESSION['userT'])) {
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="emailN" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="emailN" name="emailN">
+                    <input type="text" class="form-control" id="email" name="email">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="modificar" name="modificar">Crear</button>
+            <button type="submit" class="btn btn-primary" id="crear" name="crear">Crear</button>
         </form>
     </div>
 </body>

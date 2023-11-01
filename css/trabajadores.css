@@ -1,6 +1,11 @@
+body{
+    background-color: rgb(200, 200, 200) !important;
+}
+
 #acordeon{
     margin: auto;
     margin-top: 80px;
+    margin-bottom: 30px;
     width: 400px;
     
 }
@@ -17,7 +22,7 @@
 #formBusqueda{
     width: 500px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 #formAcceso{
