@@ -40,6 +40,16 @@
     margin-bottom: 40px;
 }
 
+#modifPass{
+    text-align:start !important;
+}
+
+
+#modifPass *{
+    font-size: 15px !important;
+}
+
+
 @media screen and (max-width: 760px) {
 
     #img{

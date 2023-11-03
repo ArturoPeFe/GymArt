@@ -14,23 +14,55 @@ if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
     header('Location: ../pages/acceso.php');
 }
 
-$_SESSION['timeout'] = time() + 600;
+if (isset($_SESSION['user'])) {
+    $_SESSION['timeout'] = time() + 600;
 
-$email = $_SESSION['user'];
-$consulta = "SELECT * FROM clientes WHERE email = :email";
-$exec = $bdGym->prepare($consulta);
-$exec->bindParam(':email', $email);
+    $email = $_SESSION['user'];
+    $consulta = "SELECT * FROM clientes WHERE email = :email";
+    $exec = $bdGym->prepare($consulta);
+    $exec->bindParam(':email', $email);
 
-try {
-    $exec->execute();
-} catch (PDOException $e) {
-    $error = true;
-    $mensaje = $e->getMessage();
-    $bdGym = null;
+    try {
+        $exec->execute();
+    } catch (PDOException $e) {
+        $error = true;
+        $mensaje = $e->getMessage();
+        $bdGym = null;
+    }
+
+    $datos = $exec->fetch(PDO::FETCH_OBJ);
+
+    if (!isset($_SESSION['nombre'])) {
+        $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->apellido2;
+    }
 }
 
-$datos = $exec->fetch(PDO::FETCH_OBJ);
-$_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->apellido2;
+if (isset($_POST['cambiarPass'])) {
+    $dni = $_POST['dniN'];
+    $nuevaPass = $_POST['nuevaPass'];
+    $confirmarNuevaPass = $_POST['confirmarNuevaPass'];
+
+    if ($nuevaPass == $confirmarNuevaPass) {
+        $exec = $bdGym->prepare("CALL ActualizarPass(:dni,:nuevaPass)");
+        $exec->bindParam(':dni', $dni);
+        $exec->bindParam(':nuevaPass', $nuevaPass);
+
+        try {
+            $exec->execute();
+        } catch (PDOException $e) {
+            $error = true;
+            $mensaje = $e->getMessage();
+            $bdGym = null;
+        }
+
+        if (!$error) {
+            $mensaje = 'Contraseña actualizada';
+        }
+    }
+    else{
+        $mensaje="Las contraseñas no coinciden";
+    }
+}
 
 ?>
 
@@ -155,16 +187,24 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body text-center">
-                                <p><a href="../priv/datosClientes.php">Consulta/Modificación Clientes</a></p>
-                                <p><a href="../priv/altaClient.php">Alta Cliente</a></p>
-                                <p><a href="../priv/datosTrabajadores.php">Consulta/Modificación Trabajador</a></p>
-                                <p><a href="../priv/altaTrab.php">Alta Trabajador</a></p>
+                                <form id="modifPass" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                                    <input hidden id="dniN" name="dniN" value="<?php echo "{$datos->dni}"; ?>">
+                                    <div class="mb-2">
+                                        <label for="nuevaPass" class="form-label">Nueva contraseña</label>
+                                        <input type="password" class="form-control" id="nuevaPass" name="nuevaPass">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="confirmarNuevaPass" class="form-label">Confirmar contraseña</label>
+                                        <input type="password" class="form-control" id="confirmarNuevaPass" name="confirmarNuevaPass">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="cambiarPass" name="cambiarPass">Confirmar</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <?php if(isset($mensaje)) echo '<p style="text-align: center;color: red;">' . $mensaje . '</p>';?>
             <div id="divBoton"><button id="boton" type="submit"><a href="../src/cerrarSesion.php">Cerrar Sesión</a></button></div>
         </div>
     </div>
