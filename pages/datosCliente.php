@@ -2,7 +2,7 @@
 session_start();
 require('../src/conexion.php');
 
-if(!isset($_SESSION['user'])){
+if (!isset($_SESSION['user'])) {
     session_destroy();
     header('Location: ../pages/acceso.php');
 }
@@ -144,6 +144,27 @@ $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->a
             <div id="datos4" class="row justify-content-center">
                 <div id="suscripcion" class="col"><strong>Estado suscripción:&nbsp;</strong><?php echo "{$datos->suscripcion}"; ?></div>
             </div>
+
+            <div id="acordeon">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Modificar contraseña
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body text-center">
+                                <p><a href="../priv/datosClientes.php">Consulta/Modificación Clientes</a></p>
+                                <p><a href="../priv/altaClient.php">Alta Cliente</a></p>
+                                <p><a href="../priv/datosTrabajadores.php">Consulta/Modificación Trabajador</a></p>
+                                <p><a href="../priv/altaTrab.php">Alta Trabajador</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="divBoton"><button id="boton" type="submit"><a href="../src/cerrarSesion.php">Cerrar Sesión</a></button></div>
         </div>
     </div>

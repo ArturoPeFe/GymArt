@@ -13,14 +13,16 @@ if (isset($_POST['crear'])) {
     $apellido2 = $_POST['apellido2'];
     $dni = $_POST['dni'];
     $email = $_POST['email'];
+    $descripcion = $_POST['descripcion'];
 
-    $exec = $bdGym->prepare("CALL InsertarTrabajador(:dni,:nom,:ap1,:ap2,:email,:pass)");
+    $exec = $bdGym->prepare("CALL InsertarTrabajador(:dni,:nom,:ap1,:ap2,:email,:descripcion,:pass)");
 
     $exec->bindParam(':dni', $dni);
     $exec->bindParam(':nom', $nombre);
     $exec->bindParam(':ap1', $apellido1);
     $exec->bindParam(':ap2', $apellido2);
     $exec->bindParam(':email', $email);
+    $exec->bindParam(':descripcion', $descripcion);
     $exec->bindParam(':pass', $dni);
 
     try {
@@ -104,6 +106,12 @@ if (isset($_POST['crear'])) {
                 <div class="col-md-6 mb-3">
                     <label for="emailN" class="form-label">Email</label>
                     <input type="text" class="form-control" id="email" name="email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="descripcion" class="form-label">Descripción Puesto:</label>
+                    <textarea class="form-control" name="descripcion" id="descripcion" style="height: 150px;"></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" id="crear" name="crear">Crear</button>

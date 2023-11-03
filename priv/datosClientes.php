@@ -2,9 +2,29 @@
 session_start();
 require('../src/conexion.php');
 
-if(!isset($_SESSION['userT'])){
+if (!isset($_SESSION['userT'])) {
     session_destroy();
     header('Location: ../priv/accesoTrabajadores.php');
+}
+
+if (isset($_POST['borrar'])) {
+    $dni = $_POST['dni'];
+
+    $exec = $bdGym->prepare("CALL BorrarCliente(:dni)");
+
+    $exec->bindParam(':dni', $dni);
+
+    try {
+        $exec->execute();
+    } catch (PDOException $e) {
+        $error = true;
+        $mensaje = $e->getMessage();
+        $bdGym = null;
+    }
+
+    if (!$error) {
+        $mensaje = 'Cliente borrado con éxito';
+    }
 }
 
 if (isset($_POST['modificar'])) {
@@ -17,8 +37,8 @@ if (isset($_POST['modificar'])) {
     $direccion = $_POST['direccion'];
     $suscripcion = $_POST['suscripcion'];
 
-    $update = "UPDATE clientes SET nombre=:nom,apellido1=:ap1,apellido2=:ap2,email=:email,`telefono`=:tel,direccion=:direccion,`suscripcion`=:suscripcion WHERE dni=:dni";
-    $exec = $bdGym->prepare($update);
+
+    $exec = $bdGym->prepare("CALL UpdateCliente(:dni,:nom,:ap1,:ap2,:email,:tel,:direccion,:suscripcion)");
     $exec->bindParam(':dni', $dni);
     $exec->bindParam(':nom', $nombre);
     $exec->bindParam(':ap1', $apellido1);
@@ -36,6 +56,9 @@ if (isset($_POST['modificar'])) {
         $bdGym = null;
     }
 
+    if (!$error) {
+        $mensaje = 'Usuario actualizado';
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -50,6 +73,8 @@ if (isset($_POST['modificar'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -101,7 +126,10 @@ if (isset($_POST['modificar'])) {
     <!-- Mostrar datos -->
     <div id="datos">
         <?php
-        if (isset($_POST['modificar'])) {echo '<p style="margin-top: 20px;text-align: center;">Usuario actualizado</p>';}
+        if (isset($mensaje)) {
+            echo '<p style="margin-top: 20px;text-align: center;color: green;">' . $mensaje . '</p>';
+            unset($mensaje);
+        }
         if (isset($_POST['buscar'])) {
             if (!isset($_POST['opcion'])) {
                 echo '<p style="margin-top: 20px;text-align: center;color: red;">No has seleccionado tipo de búsqueda</p>';
@@ -193,10 +221,54 @@ if (isset($_POST['modificar'])) {
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-warning" id="modificar" name="modificar">Modificar</button>
-                            <button type="submit" class="btn btn-danger" id="delete" name="delete">Borrar usuario</button>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate">Modificar</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">Borrar</button>
+
+                            <button type="submit" id="modificar" name="modificar" hidden></button>
+                            <button type="submit" id="borrar" name="borrar" hidden></button>
                         </form>
                     </div>
+
+                    <!-- Modal de confirmar modificar -->
+                    <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title " id="modalLabel">¿Confirmar los cambios?</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" name="confirmarModificar" id="confirmarModificar">Confirmar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal de confirmar borrar -->
+                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title " id="modalLabel">¿Seguro que quiere eliminar el usuario?</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" name="confirmarBorrar" id="confirmarBorrar">Confirmar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Script para confirmar envío formulario con modal -->
+                    <script>
+                        document.getElementById("confirmarModificar").addEventListener("click", function() {
+                            document.getElementById("modificar").click();
+                        });
+
+                        document.getElementById("confirmarBorrar").addEventListener("click", function() {
+                            document.getElementById("borrar").click();
+                        });
+                    </script>
         <?php }
             }
         } ?>
