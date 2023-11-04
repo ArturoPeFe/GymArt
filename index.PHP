@@ -30,6 +30,89 @@ $_SESSION['timeout'] = time() + 600;
   <script src="https://kit.fontawesome.com/2eff857ffa.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    // Función para comprobar si el div está visible
+    function isElementInViewport(elemento) {
+      const rect = elemento.getBoundingClientRect();
+
+      return (
+        rect.top >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) 
+      );
+    }
+
+    // Función para actualizar la clase del menú-pc
+    function actualizarClaseMenuPc() {
+
+      const preciosDiv = document.getElementById("precios");
+
+      const inicioLink = document.querySelector("#opcionesMenu a[href='#fondo']");
+      const preciosLink = document.querySelector("#opcionesMenu a[href='#precios']");
+
+      if (isElementInViewport(preciosDiv)) {
+        inicioLink.classList.remove("pagActiva");
+        preciosLink.classList.add("pagActiva");
+
+      } else {
+        inicioLink.classList.add("pagActiva");
+        preciosLink.classList.remove("pagActiva");
+      }
+    }
+    // Función para actualizar la clase del menú-móvil
+    function actualizarClaseMenuMovil() {
+
+      const preciosDiv = document.getElementById("precios");
+
+      const inicioLinkMovil = document.querySelector("#opMM a[href='#fondo']");
+      const preciosLinkMovil = document.querySelector("#opMM a[href='#precios']");
+
+
+      if (isElementInViewport(preciosDiv)) {
+
+        inicioLinkMovil.classList.remove("naranja");
+        preciosLinkMovil.classList.add("naranja");
+
+      } else {
+
+        inicioLinkMovil.classList.add("naranja");
+        preciosLinkMovil.classList.remove("naranja");
+      }
+    }
+
+    // Escuchar eventos de scroll
+    window.addEventListener("scroll", function() {
+      actualizarClaseMenuPc();
+      actualizarClaseMenuMovil();
+    });
+
+    // Llamar a la función inicialmente para verificar la clase en la carga de la página
+    actualizarClaseMenuPc();
+    actualizarClaseMenuMovil();
+  </script>
+
+  <script>
+    //Para cerrar menú desplegable en móvil si se pulsa Inicio, Precios o Valoraciones
+    window.addEventListener("load", function() {
+      const a = document.getElementById("bInicio");
+      const b = document.getElementById("bPrecios");
+      const c = document.getElementById("bValoraciones");
+      const d = document.getElementById('cerrarMenu');
+
+      a.addEventListener("click", function() {
+        d.click();
+      });
+
+      b.addEventListener("click", function() {
+        d.click();
+      });
+
+      c.addEventListener("click", function() {
+        d.click();
+      });
+    });
+  </script>
+
 </head>
 
 <body>
@@ -44,9 +127,10 @@ $_SESSION['timeout'] = time() + 600;
       </div>
       <div id="opcionesMenu">
         <ul>
-          <li><a class="pagActiva" href="./">Inicio </a> </li>
-          <li><a href="./pages/miembros.php">Miembros</a></li>
+          <li><a class="pagActiva" href="#fondo">Inicio </a> </li>
+          <li><a href="#precios">Precios</a></li>
           <li><a href="#">Valoraciones</a></li>
+          <li><a href="./pages/miembros.php">Miembros</a></li>
           <li><a href="./pages/contacto.php">Contacto</a></li>
           <li><a href="./pages/acceso.php">Acceder</a></li>
         </ul>
@@ -81,18 +165,21 @@ $_SESSION['timeout'] = time() + 600;
               ?>
             </a>
           </h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" id="cerrarMenu"></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body" id="opMM">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active text-center naranja" aria-current="page" href="./">Inicio</a>
+              <a class="nav-link text-center naranja" href="#fondo" id="bInicio">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">Miembros</a>
+              <a class="nav-link text-center" href="#precios" id="bPrecios">Precios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">Valoraciones</a>
+              <a class="nav-link text-center" href="./pages/miembros.php">Miembros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-center" href="#" id="bValoraciones">Valoraciones</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center" href="./pages/contacto.php">Contacto</a>

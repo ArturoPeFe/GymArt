@@ -56,6 +56,8 @@ if (isset($_SESSION['user'])) {
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
       <script src="https://kit.fontawesome.com/2eff857ffa.js" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -70,8 +72,9 @@ if (isset($_SESSION['user'])) {
           <div id="opcionesMenu">
             <ul>
               <li><a href="../">Inicio </a> </li>
-              <li><a href="../pages/miembros.php">Miembros</a></li>
+              <li><a href="../#precios">Precios</a></li>
               <li><a href="#">Valoraciones</a></li>
+              <li><a href="../pages/miembros.php">Miembros</a></li>
               <li><a href="../pages/contacto.php">Contacto</a></li>
               <li><a class="pagActiva" href="../pages/acceso.php">Acceder</a></li>
             </ul>
@@ -114,10 +117,13 @@ if (isset($_SESSION['user'])) {
                   <a class="nav-link text-center" aria-current="page" href="../">Inicio</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
+                  <a class="nav-link text-center" href="../#precios">Precios</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-center" href="#">Valoraciones</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-center" href="../pages/contacto.php">Contacto</a>

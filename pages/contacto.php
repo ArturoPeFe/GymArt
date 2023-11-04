@@ -41,8 +41,9 @@ $_SESSION['timeout'] = time() + 600;
             <div id="opcionesMenu">
                 <ul>
                     <li><a href="../">Inicio </a> </li>
-                    <li><a href="../pages/miembros.php">Miembros</a></li>
+                    <li><a href="../#precios">Precios</a></li>
                     <li><a href="#">Valoraciones</a></li>
+                    <li><a href="../pages/miembros.php">Miembros</a></li>
                     <li><a class="pagActiva" href="../pages/contacto.php">Contacto</a></li>
                     <li><a href="../pages/acceso.php">Acceder</a></li>
                 </ul>
@@ -85,16 +86,19 @@ $_SESSION['timeout'] = time() + 600;
                             <a class="nav-link text-center" aria-current="page" href="../">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
+                            <a class="nav-link text-center" href="../#precios">Precios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="#">Valoraciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-center naranja" href="../pages/contacto.php">Contacto</a>
+                            <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="../pages/acceso.php">Acceder</a>
+                            <a class="nav-link text-center naranja" href="../pages/contacto.php">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-center" href="../pages/acceso.php">Acceder</a>
                         </li>
                     </ul>
                 </div>

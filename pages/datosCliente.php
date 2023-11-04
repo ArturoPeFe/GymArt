@@ -58,9 +58,8 @@ if (isset($_POST['cambiarPass'])) {
         if (!$error) {
             $mensaje = 'Contraseña actualizada';
         }
-    }
-    else{
-        $mensaje="Las contraseñas no coinciden";
+    } else {
+        $mensaje = "Las contraseñas no coinciden";
     }
 }
 
@@ -96,8 +95,9 @@ if (isset($_POST['cambiarPass'])) {
             <div id="opcionesMenu">
                 <ul>
                     <li><a href="../">Inicio </a> </li>
-                    <li><a href="../pages/miembros.php">Miembros</a></li>
+                    <li><a href="../#precios">Precios</a></li>
                     <li><a href="#">Valoraciones</a></li>
+                    <li><a href="../pages/miembros.php">Miembros</a></li>
                     <li><a href="../pages/contacto.php">Contacto</a></li>
                     <li><a class="pagActiva" href="../pages/acceso.php">Acceder</a></li>
                 </ul>
@@ -140,10 +140,13 @@ if (isset($_POST['cambiarPass'])) {
                             <a class="nav-link text-center" aria-current="page" href="../">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
+                            <a class="nav-link text-center" href="../#precios">Precios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="#">Valoraciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="../pages/contacto.php">Contacto</a>
@@ -204,9 +207,14 @@ if (isset($_POST['cambiarPass'])) {
                     </div>
                 </div>
             </div>
-            <?php if(isset($mensaje)) echo '<p style="text-align: center;color: red;">' . $mensaje . '</p>';?>
+            <?php if (isset($mensaje)) echo '<p style="text-align: center;color: red;">' . $mensaje . '</p>'; ?>
             <div id="divBoton"><button id="boton" onclick="cerrarSesion()"><a href="../src/cerrarSesion.php" id="cerrarSesion">Cerrar Sesión</a></button></div>
-            <script>function cerrarSesion(){let a=document.getElementById('cerrarSesion'); a.click();}</script> <!-- por si haces click en el boton pero fuera del <a> -->
+            <script>
+                function cerrarSesion() {
+                    let a = document.getElementById('cerrarSesion');
+                    a.click();
+                }
+            </script> <!-- por si haces click en el boton pero fuera del <a> -->
         </div>
     </div>
 
