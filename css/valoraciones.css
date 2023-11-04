@@ -1,0 +1,32 @@
+#valoraciones{
+    width: 80vw;
+    margin: auto;
+    margin-bottom: 80px;
+}
+
+#espaciador hr{
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+#valoraciones h2{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#cartasValoracion{
+    width: 60vw !important;
+    margin: auto;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 760px) {
+
+    #valoraciones{
+        width: 90vw;
+    }
+
+    #cartasValoracion{
+        width: 70vw !important;
+    }
+}

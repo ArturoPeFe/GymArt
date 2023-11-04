@@ -13,7 +13,7 @@
     padding: 0px !important
 }
 
-.carousel-item::before {
+.fondoOscuro::before {
     content: "";
     position: absolute;
     top: 0;

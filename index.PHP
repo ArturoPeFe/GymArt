@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('./src/conexion.php');
 $_SESSION['credencialesErroneas'] = False;
 
 // Verificar si la sesión ha expirado
@@ -10,6 +11,18 @@ if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
 }
 
 $_SESSION['timeout'] = time() + 600;
+
+//Obtener datos valoraciones
+$consulta = "CALL ObtenerValoraciones";
+$exec = $bdGym->prepare($consulta);
+
+try {
+  $exec->execute();
+} catch (PDOException $e) {
+  $error = true;
+  $mensaje = $e->getMessage();
+  $bdGym = null;
+}
 
 ?>
 <!DOCTYPE html>
@@ -24,6 +37,7 @@ $_SESSION['timeout'] = time() + 600;
   <link rel="stylesheet" type="text/css" href="./css/mensBienvenidoIndex.css">
   <link rel="stylesheet" type="text/css" href="./css/cardsYcarrusel.css">
   <link rel="stylesheet" type="text/css" href="./css/precios.css">
+  <link rel="stylesheet" type="text/css" href="./css/valoraciones.css">
   <link rel="stylesheet" type="text/css" href="./css/footer.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -38,27 +52,35 @@ $_SESSION['timeout'] = time() + 600;
 
       return (
         rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) 
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.left >= 0 &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
       );
     }
 
     // Función para actualizar la clase del menú-pc
     function actualizarClaseMenuPc() {
-
       const preciosDiv = document.getElementById("precios");
-
+      const valoracionesDiv = document.getElementById("valoraciones");
       const inicioLink = document.querySelector("#opcionesMenu a[href='#fondo']");
       const preciosLink = document.querySelector("#opcionesMenu a[href='#precios']");
+      const valoracionesLink = document.querySelector("#opcionesMenu a[href='#valoraciones']");
 
-      if (isElementInViewport(preciosDiv)) {
+      if (isElementInViewport(valoracionesDiv)) {
+        inicioLink.classList.remove("pagActiva");
+        preciosLink.classList.remove("pagActiva");
+        valoracionesLink.classList.add("pagActiva");
+      } else if (isElementInViewport(preciosDiv)) {
         inicioLink.classList.remove("pagActiva");
         preciosLink.classList.add("pagActiva");
-
+        valoracionesLink.classList.remove("pagActiva");
       } else {
         inicioLink.classList.add("pagActiva");
         preciosLink.classList.remove("pagActiva");
+        valoracionesLink.classList.remove("pagActiva");
       }
     }
+
     // Función para actualizar la clase del menú-móvil
     function actualizarClaseMenuMovil() {
 
@@ -129,7 +151,7 @@ $_SESSION['timeout'] = time() + 600;
         <ul>
           <li><a class="pagActiva" href="#fondo">Inicio </a> </li>
           <li><a href="#precios">Precios</a></li>
-          <li><a href="#">Valoraciones</a></li>
+          <li><a href="#valoraciones">Valoraciones</a></li>
           <li><a href="./pages/miembros.php">Miembros</a></li>
           <li><a href="./pages/contacto.php">Contacto</a></li>
           <li><a href="./pages/acceso.php">Acceder</a></li>
@@ -176,10 +198,10 @@ $_SESSION['timeout'] = time() + 600;
               <a class="nav-link text-center" href="#precios" id="bPrecios">Precios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="./pages/miembros.php">Miembros</a>
+              <a class="nav-link text-center" href="#valoraciones" id="bValoraciones">Valoraciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#" id="bValoraciones">Valoraciones</a>
+              <a class="nav-link text-center" href="./pages/miembros.php">Miembros</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center" href="./pages/contacto.php">Contacto</a>
@@ -246,7 +268,7 @@ $_SESSION['timeout'] = time() + 600;
         <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
       <div class="carousel-inner">
-        <div class="carousel-item active">
+        <div class="carousel-item fondoOscuro active">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col sinSep">
               <img src="./assets/img/bg/gallery-04.jpg" class="d-block w-100" alt="Imagen 1">
@@ -262,7 +284,7 @@ $_SESSION['timeout'] = time() + 600;
             </div>
           </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item fondoOscuro">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col sinSep">
               <img src="./assets/img/bg/gallery-01.jpg" class="d-block w-100 opacidad" alt="Imagen 1">
@@ -278,7 +300,7 @@ $_SESSION['timeout'] = time() + 600;
             </div>
           </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item fondoOscuro">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col sinSep">
               <img src="./assets/img/bg/gallery-05.jpg" class="d-block w-100" alt="Imagen 1">
@@ -312,7 +334,7 @@ $_SESSION['timeout'] = time() + 600;
       <hr class="naranja border-3 opacity-75">
     </div>
     <p>Disponemos de varios precios mensuales, según opciones.<br>* Consultar ofertas promocionales.</p>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="margenAbajo">
       <div class="col">
         <div class="card h-100 ">
           <div class="card-header">
@@ -343,6 +365,62 @@ $_SESSION['timeout'] = time() + 600;
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="valoraciones">
+    <h2 class="w700">Valoraciones de los clientes</h2>
+    <div id="espaciador">
+      <hr class="naranja border-3 opacity-75">
+    </div>
+    <div id="carrusel2" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner" id="cartasValoracion">
+
+        <?php
+        $i = True;
+        $one = 0;
+        while ($i == True) {
+          if ($datos = $exec->fetch(PDO::FETCH_OBJ)) {
+            if ($one == 0) {
+        ?>
+              <div class="carousel-item active">
+                <div class="card">
+                  <div class="card-header w700">
+                    <?php echo $datos->nombre ?>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text"><?php echo $datos->comentario ?></p>
+                  </div>
+                </div>
+              </div>
+            <?php
+              $one = 1;
+            } else {
+            ?>
+              <div class="carousel-item">
+                <div class="card">
+                  <div class="card-header w700">
+                    <?php echo $datos->nombre ?>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text"><?php echo $datos->comentario ?></p>
+                  </div>
+                </div>
+              </div>
+        <?php
+            }
+          } else $i = False;
+        } ?>
+
+      </div>
+      <a class="carousel-control-prev" href="#carrusel2" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </a>
+      <a class="carousel-control-next" href="#carrusel2" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </a>
     </div>
   </div>
 

@@ -1,7 +1,7 @@
 #precios {
     width: 80%;
+    height: max-content;
     margin: auto;
-    margin-bottom: 80px;
     text-align: center;
     margin-top: 50px;
 }
@@ -23,4 +23,8 @@
 
 #precios .card{
     border: 0px !important;
+}
+
+#margenAbajo{
+    padding-bottom: 160px;
 }
