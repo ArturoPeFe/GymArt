@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('../src/conexion.php');
 
 // Verificar si la sesión ha expirado
 if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
@@ -9,6 +10,18 @@ if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
 }
 
 $_SESSION['timeout'] = time() + 600;
+
+$consulta = "SELECT * FROM trabajadores";
+$exec = $bdGym->prepare($consulta);
+
+try {
+    $exec->execute();
+} catch (PDOException $e) {
+    $error = true;
+    $mensaje = $e->getMessage();
+    $bdGym = null;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +32,7 @@ $_SESSION['timeout'] = time() + 600;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/all.css">
     <link rel="stylesheet" type="text/css" href="../css/menu.css">
-    <link rel="stylesheet" type="text/css" href="../css/contacto.css">
+    <link rel="stylesheet" type="text/css" href="../css/miembros.css">
     <link rel="stylesheet" type="text/css" href="../css/footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -41,9 +54,9 @@ $_SESSION['timeout'] = time() + 600;
             <div id="opcionesMenu">
                 <ul>
                     <li><a href="../">Inicio </a> </li>
-                    <li><a href="../pages/miembros.php">Miembros</a></li>
+                    <li><a class="pagActiva" href="../pages/miembros.php">Miembros</a></li>
                     <li><a href="#">Valoraciones</a></li>
-                    <li><a class="pagActiva" href="../pages/contacto.php">Contacto</a></li>
+                    <li><a href="../pages/contacto.php">Contacto</a></li>
                     <li><a href="../pages/acceso.php">Acceder</a></li>
                 </ul>
             </div>
@@ -85,13 +98,13 @@ $_SESSION['timeout'] = time() + 600;
                             <a class="nav-link text-center" aria-current="page" href="../">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
+                            <a class="nav-link active text-center" href="../pages/miembros.php">Miembros</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="#">Valoraciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-center naranja" href="../pages/contacto.php">Contacto</a>
+                            <a class="nav-link text-center naranja" href="../pages/contacto.php">Contacto</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="../pages/acceso.php">Acceder</a>
@@ -105,24 +118,27 @@ $_SESSION['timeout'] = time() + 600;
     <div id="fondo"></div>
     <div id="mensPrincipal">
         <div>
-            <h1>Contacta con Nosotros</h1>
+            <h1>Nuestro Equipo</h1>
         </div>
     </div>
 
-    <div id="cuerpo">
-        <h1>Encuéntranos</h1>
-        <div id="espaciador">
-            <hr class="naranja border-3 opacity-75">
-        </div>
-        <p>Estamos ubicados en el centro de la ciudad y es fácil llegar con cualquier tipo de transporte público.</p>
-        <h3>Ourense</h3>
-        <p>Calle de la calle, 22 - 32003 Ourense</p>
-        <p>Teléfono: 988 123 456</p>
-        <p>Correo: info@ejemplocorreo.com</p>
-    </div>
+    <div id="miembros">
+        <?php
+        $i = True;
+        while ($i == True) {
+            if ($datos = $exec->fetch(PDO::FETCH_OBJ)) {
+        ?>
+                <div class="card" style="margin: 40px 0px;">
+                    <h3 class="card-header w700"><?php echo $datos->nombre . ' ' . $datos->apellido1 ?></h3>
+                    <div class="card-body">
+                        <h5 class="card-title naranja"><?php echo $datos->puesto ?></h5>
+                        <p class="card-text"><?php echo $datos->descripcion_puesto ?></p>
+                    </div>
+                </div>
+        <?php
+            } else $i = False;
+        } ?>
 
-    <div id="mapa">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11798.175935803689!2d-7.8744937!3d42.3309242!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2ff932917ad993%3A0x5143d80e114ada98!2sC.I.F.P%20A%20Carballeira!5e0!3m2!1ses!2ses!4v1698603128050!5m2!1ses!2ses" width="900" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <footer id="footerDatos">

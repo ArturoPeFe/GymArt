@@ -33,13 +33,17 @@ if (isset($_POST['modificar'])) {
     $apellido2 = $_POST['apellido2'];
     $dni = $_POST['dni'];
     $email = $_POST['emailN'];
+    $puesto = $_POST['puesto'];
+    $descripcion = $_POST['descripcion'];
 
-    $exec = $bdGym->prepare("CALL UpdateTrabajador(:dni,:nom,:ap1,:ap2,:email)");
+    $exec = $bdGym->prepare("CALL UpdateTrabajador(:dni,:nom,:ap1,:ap2,:email,:puesto,:descripcion)");
     $exec->bindParam(':dni', $dni);
     $exec->bindParam(':nom', $nombre);
     $exec->bindParam(':ap1', $apellido1);
     $exec->bindParam(':ap2', $apellido2);
     $exec->bindParam(':email', $email);
+    $exec->bindParam(':puesto', $puesto);
+    $exec->bindParam(':descripcion', $descripcion);
     try {
         $exec->execute();
     } catch (PDOException $e) {
@@ -171,31 +175,37 @@ if (isset($_POST['modificar'])) {
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $datos->nombre ?>">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required value="<?php echo $datos->nombre ?>">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="apellido1" class="form-label">Apellido1</label>
-                                    <input type="text" class="form-control" id="apellido1" name="apellido1" value="<?php echo $datos->apellido1 ?>">
+                                    <input type="text" class="form-control" id="apellido1" name="apellido1" required value="<?php echo $datos->apellido1 ?>">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="apellido2" class="form-label">Apellido2</label>
-                                    <input type="text" class="form-control" id="apellido2" name="apellido2" value="<?php echo $datos->apellido2 ?>">
+                                    <input type="text" class="form-control" id="apellido2" name="apellido2" required value="<?php echo $datos->apellido2 ?>">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="dni" class="form-label">Dni</label>
-                                    <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $datos->dni ?>" readonly>
+                                    <input type="text" class="form-control" id="dni" name="dni" required value="<?php echo $datos->dni ?>" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="emailN" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="emailN" name="emailN" value="<?php echo $datos->email ?>">
+                                    <input type="text" class="form-control" id="emailN" name="emailN" required value="<?php echo $datos->email ?>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="puesto" class="form-label">Puesto:</label>
+                                    <input class="form-control" name="puesto" id="puesto" required value="<?php echo $datos->puesto?>">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label for="descripcion" class="form-label">Descripción Puesto:</label>
-                                    <textarea class="form-control" name="descripcion" id="descripcion" style="height: 150px;"><?php echo $datos->descripcion_puesto ?></textarea>
+                                    <textarea class="form-control" name="descripcion" id="descripcion" required style="height: 150px;"><?php echo $datos->descripcion_puesto ?></textarea>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalUpdate">Modificar</button>

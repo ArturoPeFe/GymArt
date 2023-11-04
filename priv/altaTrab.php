@@ -13,15 +13,17 @@ if (isset($_POST['crear'])) {
     $apellido2 = $_POST['apellido2'];
     $dni = $_POST['dni'];
     $email = $_POST['email'];
+    $puesto = $_POST['puesto'];
     $descripcion = $_POST['descripcion'];
 
-    $exec = $bdGym->prepare("CALL InsertarTrabajador(:dni,:nom,:ap1,:ap2,:email,:descripcion,:pass)");
+    $exec = $bdGym->prepare("CALL InsertarTrabajador(:dni,:nom,:ap1,:ap2,:email, :puesto, :descripcion,:pass)");
 
     $exec->bindParam(':dni', $dni);
     $exec->bindParam(':nom', $nombre);
     $exec->bindParam(':ap1', $apellido1);
     $exec->bindParam(':ap2', $apellido2);
     $exec->bindParam(':email', $email);
+    $exec->bindParam(':puesto', $puesto);
     $exec->bindParam(':descripcion', $descripcion);
     $exec->bindParam(':pass', $dni);
 
@@ -33,7 +35,9 @@ if (isset($_POST['crear'])) {
         $bdGym = null;
     }
 
-    if(!$error){$mensaje='Trabajador registrado con éxito';}
+    if (!$error) {
+        $mensaje = 'Trabajador registrado con éxito';
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -81,37 +85,45 @@ if (isset($_POST['crear'])) {
             </div>
         </div>
     </div>
-    <?php if(isset($mensaje)){echo '<p style="margin-top: 20px;text-align: center;color: green;">'. $mensaje .'</p>';} ?>
+    <?php if (isset($mensaje)) {
+        echo '<p style="margin-top: 20px;text-align: center;color: green;">' . $mensaje . '</p>';
+    } ?>
     <div class="container" id="formCrear">
         <form id="formModif" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre">
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="apellido1" class="form-label">Apellido1</label>
-                    <input type="text" class="form-control" id="apellido1" name="apellido1">
+                    <input type="text" class="form-control" id="apellido1" name="apellido1" required>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="apellido2" class="form-label">Apellido2</label>
-                    <input type="text" class="form-control" id="apellido2" name="apellido2">
+                    <input type="text" class="form-control" id="apellido2" name="apellido2" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="dni" class="form-label">Dni</label>
-                    <input type="text" class="form-control" id="dni" name="dni">
+                    <input type="text" class="form-control" id="dni" name="dni" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="emailN" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" name="email">
+                    <input type="text" class="form-control" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label for="puesto" class="form-label">Puesto:</label>
+                    <input class="form-control" name="puesto" id="puesto" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="descripcion" class="form-label">Descripción Puesto:</label>
-                    <textarea class="form-control" name="descripcion" id="descripcion" style="height: 150px;"></textarea>
+                    <textarea class="form-control" name="descripcion" id="descripcion" style="height: 150px;" required></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" id="crear" name="crear">Crear</button>

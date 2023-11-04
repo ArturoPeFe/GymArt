@@ -179,41 +179,41 @@ if (isset($_POST['modificar'])) {
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $datos->nombre ?>">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required value="<?php echo $datos->nombre ?>">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="apellido1" class="form-label">Apellido1</label>
-                                    <input type="text" class="form-control" id="apellido1" name="apellido1" value="<?php echo $datos->apellido1 ?>">
+                                    <input type="text" class="form-control" id="apellido1" name="apellido1" required value="<?php echo $datos->apellido1 ?>">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="apellido2" class="form-label">Apellido2</label>
-                                    <input type="text" class="form-control" id="apellido2" name="apellido2" value="<?php echo $datos->apellido2 ?>">
+                                    <input type="text" class="form-control" id="apellido2" name="apellido2" required value="<?php echo $datos->apellido2 ?>">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label for="dni" class="form-label">Dni</label>
-                                    <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $datos->dni ?>" readonly>
+                                    <input type="text" class="form-control" id="dni" name="dni" required value="<?php echo $datos->dni ?>" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="emailN" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="emailN" name="emailN" value="<?php echo $datos->email ?>">
+                                    <input type="text" class="form-control" id="emailN" name="emailN" required value="<?php echo $datos->email ?>">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $datos->telefono ?>">
+                                    <input type="text" class="form-control" id="telefono" name="telefono" required value="<?php echo $datos->telefono ?>">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label for="direccion" class="form-label">Dirección</label>
-                                    <input type="text" class="form-control" id="direccion" name="direccion" value="<?php echo $datos->direccion ?>">
+                                    <input type="text" class="form-control" id="direccion" name="direccion" required value="<?php echo $datos->direccion ?>">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-2 mb-3">
                                     <label for="suscripcion" class="form-label">Suscripción</label>
-                                    <select class="form-select" id="suscripcion" name="suscripcion">
+                                    <select class="form-select" id="suscripcion" name="suscripcion" required>
                                         <option hidden selected><?php echo $datos->suscripcion ?></option>
                                         <option value="Activa">Activa</option>
                                         <option value="Inactiva">Inactiva</option>
