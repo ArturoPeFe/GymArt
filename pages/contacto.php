@@ -42,7 +42,7 @@ $_SESSION['timeout'] = time() + 600;
                 <ul>
                     <li><a href="../">Inicio </a> </li>
                     <li><a href="../#precios">Precios</a></li>
-                    <li><a href="#">Valoraciones</a></li>
+                    <li><a href="../#valoraciones">Valoraciones</a></li>
                     <li><a href="../pages/miembros.php">Miembros</a></li>
                     <li><a class="pagActiva" href="../pages/contacto.php">Contacto</a></li>
                     <li><a href="../pages/acceso.php">Acceder</a></li>
@@ -89,7 +89,7 @@ $_SESSION['timeout'] = time() + 600;
                             <a class="nav-link text-center" href="../#precios">Precios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="#">Valoraciones</a>
+                            <a class="nav-link text-center" href="../#valoraciones">Valoraciones</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>

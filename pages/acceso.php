@@ -73,7 +73,7 @@ if (isset($_SESSION['user'])) {
             <ul>
               <li><a href="../">Inicio </a> </li>
               <li><a href="../#precios">Precios</a></li>
-              <li><a href="#">Valoraciones</a></li>
+              <li><a href="../#valoraciones">Valoraciones</a></li>
               <li><a href="../pages/miembros.php">Miembros</a></li>
               <li><a href="../pages/contacto.php">Contacto</a></li>
               <li><a class="pagActiva" href="../pages/acceso.php">Acceder</a></li>
@@ -120,7 +120,7 @@ if (isset($_SESSION['user'])) {
                   <a class="nav-link text-center" href="../#precios">Precios</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-center" href="#">Valoraciones</a>
+                  <a class="nav-link text-center" href="../#valoraciones">Valoraciones</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>

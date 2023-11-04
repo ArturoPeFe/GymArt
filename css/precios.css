@@ -3,18 +3,21 @@
     height: max-content;
     margin: auto;
     text-align: center;
-    margin-top: 50px;
 }
 
 #precios>h2 {
     font-weight: 700;
     font-size: 35px;
-    padding-top: 30px;
+    padding-top: 80px;
 }
 
 #precios * hr,
 #precios > p {
     margin-bottom: 40px;
+}
+
+#precios * hr {
+    margin-top: 40px !important;
 }
 
 #precios * hr {
@@ -26,5 +29,5 @@
 }
 
 #margenAbajo{
-    padding-bottom: 160px;
+    padding-bottom: 180px;
 }

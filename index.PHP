@@ -52,9 +52,7 @@ try {
 
       return (
         rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.left >= 0 &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
       );
     }
 
@@ -62,7 +60,7 @@ try {
     function actualizarClaseMenuPc() {
       const preciosDiv = document.getElementById("precios");
       const valoracionesDiv = document.getElementById("valoraciones");
-      const inicioLink = document.querySelector("#opcionesMenu a[href='#fondo']");
+      const inicioLink = document.querySelector("#opcionesMenu a[href='#inicio']");
       const preciosLink = document.querySelector("#opcionesMenu a[href='#precios']");
       const valoracionesLink = document.querySelector("#opcionesMenu a[href='#valoraciones']");
 
@@ -86,7 +84,7 @@ try {
 
       const preciosDiv = document.getElementById("precios");
 
-      const inicioLinkMovil = document.querySelector("#opMM a[href='#fondo']");
+      const inicioLinkMovil = document.querySelector("#opMM a[href='#inicio']");
       const preciosLinkMovil = document.querySelector("#opMM a[href='#precios']");
 
 
@@ -138,7 +136,7 @@ try {
 </head>
 
 <body>
-  <div id="fondo"></div>
+  <div id="inicio"></div>
   <!-- Menú de pc... -->
   <nav id="menuPc">
     <div id="menu">
@@ -149,7 +147,7 @@ try {
       </div>
       <div id="opcionesMenu">
         <ul>
-          <li><a class="pagActiva" href="#fondo">Inicio </a> </li>
+          <li><a class="pagActiva" href="#inicio">Inicio </a> </li>
           <li><a href="#precios">Precios</a></li>
           <li><a href="#valoraciones">Valoraciones</a></li>
           <li><a href="./pages/miembros.php">Miembros</a></li>
@@ -192,7 +190,7 @@ try {
         <div class="offcanvas-body" id="opMM">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link text-center naranja" href="#fondo" id="bInicio">Inicio</a>
+              <a class="nav-link text-center naranja" href="#inicio" id="bInicio">Inicio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center" href="#precios" id="bPrecios">Precios</a>
