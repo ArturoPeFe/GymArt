@@ -98,7 +98,7 @@ $_SESSION['timeout'] = time() + 600;
                             <a class="nav-link text-center naranja" href="../pages/contacto.php">Contacto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-center" href="../pages/acceso.php">Acceder</a>
+                            <a class="nav-link text-center" href="../pages/acceso.php">Acceder</a>
                         </li>
                     </ul>
                 </div>
