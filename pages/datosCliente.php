@@ -209,12 +209,13 @@ if (isset($_POST['cambiarPass'])) {
             </div>
             <?php if (isset($mensaje)) echo '<p style="text-align: center;color: red;">' . $mensaje . '</p>'; ?>
             <div id="divBoton"><button id="boton" onclick="cerrarSesion()"><a href="../src/cerrarSesion.php" id="cerrarSesion">Cerrar Sesión</a></button></div>
+            <!-- por si haces click en el boton pero fuera del <a> -->
             <script>
                 function cerrarSesion() {
                     let a = document.getElementById('cerrarSesion');
                     a.click();
                 }
-            </script> <!-- por si haces click en el boton pero fuera del <a> -->
+            </script>
         </div>
     </div>
 

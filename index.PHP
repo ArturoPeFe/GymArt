@@ -217,7 +217,14 @@ try {
     <div>
       <h1>El camino hacia el éxito siempre está en construcción</h1>
     </div>
-    <button><a href="./pages/contacto.php">Únete a nosotros</a></button>
+    <button onclick="irAcontacto()"><a id="contacto" href="./pages/contacto.php">Únete a nosotros</a></button>
+    <!-- por si haces click en el boton pero fuera del <a> -->
+    <script>
+      function irAcontacto() {
+        let a = document.getElementById('contacto');
+        a.click();
+      }
+    </script>
   </div>
   <div id="bienvenido">
     <h1>Bienvenido</h1>
