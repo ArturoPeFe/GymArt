@@ -390,7 +390,7 @@ try {
         ?>
               <div class="carousel-item active">
                 <div class="card">
-                  <div class="card-header w700">
+                  <div class="card-header w700" style='font-size:20px;'>
                     <?php echo $datos->nombre ?>
                   </div>
                   <div class="card-body">
@@ -404,7 +404,7 @@ try {
             ?>
               <div class="carousel-item">
                 <div class="card">
-                  <div class="card-header w700">
+                  <div class="card-header w700" style='font-size:20px;'>
                     <?php echo $datos->nombre ?>
                   </div>
                   <div class="card-body">
