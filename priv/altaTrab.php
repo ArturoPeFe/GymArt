@@ -25,7 +25,7 @@ if (isset($_POST['crear'])) {
     $exec->bindParam(':email', $email);
     $exec->bindParam(':puesto', $puesto);
     $exec->bindParam(':descripcion', $descripcion);
-    $exec->bindParam(':pass', $dni);
+    $exec->bindParam(':pass', password_hash($dni, PASSWORD_DEFAULT));
 
     try {
         $exec->execute();
