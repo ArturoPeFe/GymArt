@@ -32,7 +32,7 @@ if (isset($_SESSION['userT'])) {
         // Configuración del tiempo de vida de la sesión en segundos
         $_SESSION['timeout'] = time() + 600;
 
-        if ($passObtenida->pass == $pass) {
+        if (password_verify($pass, $passObtenida->pass)) {
             if (isset($_SESSION['credencialesErroneas']) && $_SESSION['credencialesErroneas'] == True) $_SESSION['credencialesErroneas'] = False;
             $_SESSION['userT'] = $dni;
             header('Location: datosClientes.php');

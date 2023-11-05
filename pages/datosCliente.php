@@ -45,7 +45,7 @@ if (isset($_POST['cambiarPass'])) {
     if ($nuevaPass == $confirmarNuevaPass) {
         $exec = $bdGym->prepare("CALL ActualizarPass(:dni,:nuevaPass)");
         $exec->bindParam(':dni', $dni);
-        $exec->bindParam(':nuevaPass', $nuevaPass);
+        $exec->bindParam(':nuevaPass',password_hash($nuevaPass, PASSWORD_DEFAULT));
 
         try {
             $exec->execute();

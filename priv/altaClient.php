@@ -27,7 +27,7 @@ if (isset($_POST['crear'])) {
     $exec->bindParam(':tel', $telefono);
     $exec->bindParam(':direccion', $direccion);
     $exec->bindParam(':suscripcion', $suscripcion);
-    $exec->bindParam(':pass', $dni);
+    $exec->bindParam(':pass', password_hash($dni, PASSWORD_DEFAULT));
 
     try {
         $exec->execute();
