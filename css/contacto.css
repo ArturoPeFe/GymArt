@@ -1,5 +1,5 @@
 #fondo {
-    height: 45vh;
+    height: 40vh;
     width: 100%;
     object-fit: cover;
     --opacidad-negro: 0.7;
@@ -30,12 +30,12 @@
 }
 
 #cuerpo {
-    margin: 60px 0px;
+    margin: 90px 0px 60px 0px;
     text-align: center;
 }
 
 #cuerpo * hr {
-    margin: 40px auto 80px auto;
+    margin: 40px auto 40px auto;
 }
 
 hr {

@@ -7,7 +7,6 @@ $_SESSION['credencialesErroneas'] = False;
 if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
   session_unset();
   session_destroy();
-  header('Location: ../pages/acceso.php');
 }
 
 $_SESSION['timeout'] = time() + 600;
@@ -26,6 +25,7 @@ try {
 
 ?>
 <!DOCTYPE html>
+<html lang="es">
 
 <head>
   <title>GymArt</title>
@@ -37,7 +37,7 @@ try {
   <link rel="stylesheet" type="text/css" href="./css/mensBienvenidoIndex.css">
   <link rel="stylesheet" type="text/css" href="./css/cardsYcarrusel.css">
   <link rel="stylesheet" type="text/css" href="./css/precios.css">
-  <link rel="stylesheet" type="text/css" href="./css/valoraciones.css">
+  <link rel="stylesheet" type="text/css" href="./css/valoracionesIndex.css">
   <link rel="stylesheet" type="text/css" href="./css/footer.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -59,23 +59,15 @@ try {
     // Función para actualizar la clase del menú-pc
     function actualizarClaseMenuPc() {
       const preciosDiv = document.getElementById("precios");
-      const valoracionesDiv = document.getElementById("valoraciones");
       const inicioLink = document.querySelector("#opcionesMenu a[href='#inicio']");
       const preciosLink = document.querySelector("#opcionesMenu a[href='#precios']");
-      const valoracionesLink = document.querySelector("#opcionesMenu a[href='#valoraciones']");
 
-      if (isElementInViewport(valoracionesDiv)) {
-        inicioLink.classList.remove("pagActiva");
-        preciosLink.classList.remove("pagActiva");
-        valoracionesLink.classList.add("pagActiva");
-      } else if (isElementInViewport(preciosDiv)) {
+      if (isElementInViewport(preciosDiv)) {
         inicioLink.classList.remove("pagActiva");
         preciosLink.classList.add("pagActiva");
-        valoracionesLink.classList.remove("pagActiva");
       } else {
         inicioLink.classList.add("pagActiva");
         preciosLink.classList.remove("pagActiva");
-        valoracionesLink.classList.remove("pagActiva");
       }
     }
 
@@ -149,7 +141,7 @@ try {
         <ul>
           <li><a class="pagActiva" href="#inicio">Inicio </a> </li>
           <li><a href="#precios">Precios</a></li>
-          <li><a href="#valoraciones">Valoraciones</a></li>
+          <li><a href="./pages/valoraciones.php">Valoraciones</a></li>
           <li><a href="./pages/miembros.php">Miembros</a></li>
           <li><a href="./pages/contacto.php">Contacto</a></li>
           <li><a href="./pages/acceso.php">Acceder</a></li>
@@ -196,7 +188,7 @@ try {
               <a class="nav-link text-center" href="#precios" id="bPrecios">Precios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#valoraciones" id="bValoraciones">Valoraciones</a>
+              <a class="nav-link text-center" href="./pages/valoraciones.php" id="bValoraciones">Valoraciones</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center" href="./pages/miembros.php">Miembros</a>
@@ -292,13 +284,13 @@ try {
         <div class="carousel-item fondoOscuro">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col sinSep">
-              <img src="./assets/img/bg/gallery-01.jpg" class="d-block w-100 opacidad" alt="Imagen 1">
+              <img src="./assets/img/bg/gallery-01.jpg" class="d-block w-100 opacidad" alt="Imagen 3">
               <div class="carousel-caption">
                 <p>BODYBUILDING</p>
               </div>
             </div>
             <div class="col sinSep sHidden1">
-              <img src="./assets/img/bg/gallery-06.jpg" class="d-block w-100" alt="Imagen 2">
+              <img src="./assets/img/bg/gallery-06.jpg" class="d-block w-100" alt="Imagen 4">
               <div class="carousel-caption">
                 <p>BODYBUILDING</p>
               </div>
@@ -308,13 +300,13 @@ try {
         <div class="carousel-item fondoOscuro">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col sinSep">
-              <img src="./assets/img/bg/gallery-05.jpg" class="d-block w-100" alt="Imagen 1">
+              <img src="./assets/img/bg/gallery-05.jpg" class="d-block w-100" alt="Imagen 5">
               <div class="carousel-caption">
                 <p>CROSSFIT</p>
               </div>
             </div>
             <div class="col sinSep sHidden1">
-              <img src="./assets/img/bg/gallery-02.jpg" class="d-block w-100" alt="Imagen 2">
+              <img src="./assets/img/bg/gallery-02.jpg" class="d-block w-100" alt="Imagen 6">
               <div class="carousel-caption">
                 <p>CROSSFIT</p>
               </div>
@@ -333,48 +325,8 @@ try {
     </div>
   </div>
 
-  <div id="precios">
-    <h2>Precios</h2>
-    <div id="espaciador">
-      <hr class="naranja border-3 opacity-75">
-    </div>
-    <p>Disponemos de varios precios mensuales, según opciones.<br>* Consultar ofertas promocionales.</p>
-    <div class="row row-cols-1 row-cols-md-3 g-4" id="margenAbajo">
-      <div class="col">
-        <div class="card h-100 ">
-          <div class="card-header">
-            <h4 class="card-title naranja w700">Estándar 35€/mes</h4>
-          </div>
-          <div class="card-body">
-            <p class="card-text">Todas nuestras instalaciones, tu programa de entrenamiento periódico y el mejor equipo a tu disposición los 365 días del año por tan solo 35,00 euros al mes.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 ">
-          <div class="card-header">
-            <h4 class="card-title naranja w700">Premium 45€/mes</h4>
-          </div>
-          <div class="card-body">
-            <p class="card-text">Todos los servicios y nuestras actividades en una tarifa única. Disfruta por 45,00 euros mensuales de todas las instalaciones y nuestro entrenamiento en grupo.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 ">
-          <div class="card-header">
-            <h4 class="card-title naranja w700">PremiumPlus 65€/mes</h4>
-          </div>
-          <div class="card-body">
-            <p class="card-text">El entrenamiento TOTAL por 65,00 euros mensuales. Incorpora a nuestra tarifa Premium una completa sesión al mes de una hora con nuestros GymArt Trainers.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div id="valoraciones">
-    <h2 class="w700">Valoraciones de los clientes</h2>
+    <h2 class="w700">Algunas de las valoraciones de nuestros clientes</h2>
     <div id="espaciador">
       <hr class="naranja border-3 opacity-75">
     </div>
@@ -382,9 +334,8 @@ try {
       <div class="carousel-inner" id="cartasValoracion">
 
         <?php
-        $i = True;
         $one = 0;
-        while ($i == True) {
+        for ($i = 0; $i < 5; $i++) {
           if ($datos = $exec->fetch(PDO::FETCH_OBJ)) {
             if ($one == 0) {
         ?>
@@ -427,20 +378,61 @@ try {
         <span class="visually-hidden">Siguiente</span>
       </a>
     </div>
+    <a id="verTodasValoraciones" class="btn btn-primary" href="./pages/valoraciones.php">Ver todas</a>
+  </div>
+
+  <div id="precios">
+    <h2>Precios</h2>
+    <div id="espaciador">
+      <hr class="naranja border-3 opacity-75">
+    </div>
+    <p>Disponemos de varios precios mensuales, según opciones.<br>* Consultar ofertas promocionales.</p>
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="margenAbajo">
+      <div class="col">
+        <div class="card h-100 ">
+          <div class="card-header">
+            <h4 class="card-title naranja w700">Estándar 35€/mes</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Todas nuestras instalaciones, tu programa de entrenamiento periódico y el mejor equipo a tu disposición los 365 días del año por tan solo 35,00 euros al mes.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 ">
+          <div class="card-header">
+            <h4 class="card-title naranja w700">Premium 45€/mes</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Todos los servicios y nuestras actividades en una tarifa única. Disfruta por 45,00 euros mensuales de todas las instalaciones y nuestro entrenamiento en grupo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 ">
+          <div class="card-header">
+            <h4 class="card-title naranja w700">PremiumPlus 65€/mes</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text">El entrenamiento TOTAL por 65,00 euros mensuales. Incorpora a nuestra tarifa Premium una completa sesión al mes de una hora con nuestros GymArt Trainers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer id="footerDatos">
     <div id="redes">
-      <a href="#"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
-      <a href="#"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
-      <a href="#"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
+      <a title="instagram" href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
+      <a title="facebook" href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
+      <a title="twitter" href="https://twitter.com/"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
     </div>
     <div id="infoFooter">
       <h3>GymArt</h3>
       <p>988 123 456</p>
       <p>info@ejemplocorreo.com</p>
       <p>Calle de la calle, 22 - 32003 Ourense</p>
-      <p><a href="#">Aviso Legal</a></p>
+      <p>Aviso Legal</p>
       <a href="./priv/accesoTrabajadores.php">Acceso Trabajadores</a>
     </div>
   </footer>

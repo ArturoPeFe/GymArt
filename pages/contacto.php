@@ -5,7 +5,6 @@ session_start();
 if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
     session_unset();
     session_destroy();
-    header('Location: ../pages/acceso.php');
 }
 
 $_SESSION['timeout'] = time() + 600;
@@ -42,7 +41,7 @@ $_SESSION['timeout'] = time() + 600;
                 <ul>
                     <li><a href="../">Inicio </a> </li>
                     <li><a href="../#precios">Precios</a></li>
-                    <li><a href="../#valoraciones">Valoraciones</a></li>
+                    <li><a href="../pages/valoraciones.php">Valoraciones</a></li>
                     <li><a href="../pages/miembros.php">Miembros</a></li>
                     <li><a class="pagActiva" href="../pages/contacto.php">Contacto</a></li>
                     <li><a href="../pages/acceso.php">Acceder</a></li>
@@ -89,7 +88,7 @@ $_SESSION['timeout'] = time() + 600;
                             <a class="nav-link text-center" href="../#precios">Precios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="../#valoraciones">Valoraciones</a>
+                            <a class="nav-link text-center" href="../pages/valoraciones.php">Valoraciones</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
@@ -114,12 +113,11 @@ $_SESSION['timeout'] = time() + 600;
     </div>
 
     <div id="cuerpo">
-        <h1>Encuéntranos</h1>
+        <h1>Ourense</h1>
         <div id="espaciador">
             <hr class="naranja border-3 opacity-75">
         </div>
         <p>Estamos ubicados en el centro de la ciudad y es fácil llegar con cualquier tipo de transporte público.</p>
-        <h3>Ourense</h3>
         <p>Calle de la calle, 22 - 32003 Ourense</p>
         <p>Teléfono: 988 123 456</p>
         <p>Correo: info@ejemplocorreo.com</p>
