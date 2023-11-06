@@ -378,8 +378,8 @@ try {
         <span class="visually-hidden">Siguiente</span>
       </a>
     </div>
-    <a id="verTodasValoraciones" class="btn btn-primary" href="./pages/valoraciones.php">Ver todas</a>
   </div>
+  <div id="verTodasValoraciones"><a class="btn btn-primary" href="./pages/valoraciones.php">Ver todas</a></div>
 
   <div id="precios">
     <h2>Precios</h2>

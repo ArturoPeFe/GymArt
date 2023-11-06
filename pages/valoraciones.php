@@ -39,8 +39,8 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/2eff857ffa.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -127,6 +127,45 @@ try {
             <h1>Valoraciones de nuestros clientes</h1>
         </div>
     </div>
+
+    <div id="valoraciones-container">
+        <!-- Aquí se mostrarán las valoraciones cargadas dinámicamente -->
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <!-- Enlaces de paginación Bootstrap -->
+        </ul>
+    </nav>
+
+    <script>
+        $(document).ready(function() {
+            // Función para cargar valoraciones de una página específica
+            function cargarValoraciones(pagina) {
+                $.ajax({
+                    url: 'cargar_valoraciones.php', // Ruta a un archivo PHP que recupera las valoraciones de la base de datos
+                    type: 'POST',
+                    data: {
+                        page: pagina
+                    }, // Envía el número de página a través de POST
+                    success: function(data) {
+                        $('#valoraciones-container').html(data);
+                    }
+                });
+            }
+
+            // Inicialmente, cargar la primera página de valoraciones
+            cargarValoraciones(1);
+
+            // Manejo de la paginación: escucha los clics en los enlaces de paginación
+            $('ul.pagination').on('click', 'a.page-link', function(e) {
+                e.preventDefault();
+                var pagina = $(this).text(); // Obtiene el número de página desde el enlace
+                cargarValoraciones(pagina);
+            });
+        });
+    </script>
+
 </body>
 
 </html>
