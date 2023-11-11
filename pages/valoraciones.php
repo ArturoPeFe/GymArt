@@ -4,6 +4,12 @@ require('../src/php/conexion.php');
 $_SESSION['credencialesErroneas'] = False;
 require('../src/php/validarSesion.php');
 require('../src/php/4pages/paginarValoraciones.php');
+
+if (isset($_POST['valorar']) && !isset($_SESSION['user'])) {
+    header('Location: ../pages/acceso.php');
+} else if (isset($_POST['valorar']) && isset($_SESSION['user'])) {
+    require('../src/php/4pages/hacerValoracion.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -44,7 +50,7 @@ require('../src/php/4pages/paginarValoraciones.php');
                 </ul>
             </div>
             <div id="acceso">
-                <a href="./pages/acceso.php" class="naranja">
+                <a href="../pages/acceso.php" class="naranja">
                     <h5><i class="bi bi-person-circle"></i></h5>&nbsp
                     <p>
                         <?php
@@ -107,6 +113,9 @@ require('../src/php/4pages/paginarValoraciones.php');
             <h1>Valoraciones de nuestros clientes</h1>
         </div>
     </div>
+
+    <div id="mensaje"><?php if (isset($mensaje)) echo '<p style="text-align: center;color: red; margin-top: 20px">' . $mensaje . '</p>'; ?></div>
+
     <div id="valoraciones">
         <?php
         $i = True;
@@ -132,12 +141,37 @@ require('../src/php/4pages/paginarValoraciones.php');
             $totalValoraciones = 5;
             $totalPaginas = ceil($totalValoraciones / $valoracionesPorPagina);
 
-            for ($i = 1; $i <= $totalPaginas; $i++) {
-                echo "<a style='min-width:35px; border-radius:20px; margin:0px 5px;' class='btn btn-secondary' href='?pagina=" . $i . "'><span>" . $i . "</span></a>";
+            if (isset($mensaje)) {
+                echo "<a style='min-width:35px; margin:0px 5px;' class='btn btn-secondary' href='../pages/valoraciones.php'><span>Ver valoraciones</span></a>";
+            } else {
+                for ($i = 1; $i <= $totalPaginas; $i++) {
+                    echo "<a style='min-width:35px; border-radius:20px; margin:0px 5px;' class='btn btn-secondary' href='?pagina=" . $i . "'><span>" . $i . "</span></a>";
+                }
             }
             ?>
         </div>
     </div>
+
+    <hr>
+    <div id="tuValoracion">
+        <p class="d-inline-flex gap-1">
+            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#formValoracion" aria-expanded="false" aria-controls="formValoracion">
+                Haz tu valoración
+            </button>
+        </p>
+        <div class="collapse" id="formValoracion">
+            <p>*Debes haber iniciado sesión para valorar</p>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <div class="mb-3">
+                    <textarea style="height: 100px;" type="text" class="form-control" id="valoracion" name="valoracion" aria-describedby="aviso"></textarea>
+                    <div id="aviso" class="form-text">Si ya has valorado antes, se actualizará dicha valoración</div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="valorar" name="valorar">Valorar</button>
+                <a hidden href="?pagina=1"></a>
+            </form><br>
+        </div>
+    </div>
+
     <footer id="footerDatos">
         <div id="redes">
             <a title="instagram" href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>

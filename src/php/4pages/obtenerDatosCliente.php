@@ -19,4 +19,5 @@ $datos = $exec->fetch(PDO::FETCH_OBJ);
 
 if (!isset($_SESSION['nombre'])) {
     $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->apellido2;
+    $_SESSION['idCl']=$datos->id_cliente;
 }
