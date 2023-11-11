@@ -4,3 +4,6 @@ ErrorDocument 404 /error/404.php
 <files conexion.php>
     deny from all 
 </files>
+<files validarSesion.php>
+    deny from all 
+</files>
