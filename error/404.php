@@ -26,11 +26,12 @@
       </div>
       <div id="opcionesMenu">
         <ul>
-          <li><a class="pagActiva" href="../">Inicio </a> </li>
-          <li><a href="#">Galería</a></li>
-          <li><a href="#">Valoraciones</a></li>
-          <li><a href="../error/404.html">Miembros</a></li>
+          <li><a href="../">Inicio </a> </li>
+          <li><a href="../#precios">Precios</a></li>
+          <li><a href="../pages/valoraciones.php">Valoraciones</a></li>
+          <li><a href="../pages/miembros.php">Miembros</a></li>
           <li><a href="../pages/contacto.php">Contacto</a></li>
+          <li><a href="../pages/acceso.php">Acceder</a></li>
         </ul>
       </div>
       <div id="acceso">
@@ -68,22 +69,22 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active text-center naranja" aria-current="page" href="../">Inicio</a>
+              <a class="nav-link text-center" aria-current="page" href="../">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">Galería</a>
+              <a class="nav-link text-center" href="../#precios">Precios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">Valoraciones</a>
+              <a class="nav-link text-center" href="../pages/valoraciones.php">Valoraciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">Miembros</a>
+              <a class="nav-link text-center" href="../pages/miembros.php">Miembros</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-center" href="../pages/contacto.php">Contacto</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="../pages/acceso.php">Acceder</a>
+              <a class="nav-link active text-center naranja" href="../pages/acceso.php">Acceder</a>
             </li>
           </ul>
         </div>
