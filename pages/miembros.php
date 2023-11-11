@@ -1,26 +1,8 @@
 <?php
 session_start();
-require('../src/conexion.php');
-
-// Verificar si la sesión ha expirado
-if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
-    session_unset();
-    session_destroy();
-}
-
-$_SESSION['timeout'] = time() + 600;
-
-$consulta = "SELECT * FROM trabajadores";
-$exec = $bdGym->prepare($consulta);
-
-try {
-    $exec->execute();
-} catch (PDOException $e) {
-    $error = true;
-    $mensaje = $e->getMessage();
-    $bdGym = null;
-}
-
+require('../src/php/conexion.php');
+require('../src/php/validarSesion.php');
+require('../src/php/4pages/obtenerDatosTrabajadores.php');
 ?>
 <!DOCTYPE html>
 <html>

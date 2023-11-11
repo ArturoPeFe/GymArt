@@ -1,13 +1,6 @@
 <?php
 session_start();
-
-// Verificar si la sesión ha expirado
-if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
-    session_unset();
-    session_destroy();
-}
-
-$_SESSION['timeout'] = time() + 600;
+require('../src/php/validarSesion.php');
 ?>
 <!DOCTYPE html>
 <html>

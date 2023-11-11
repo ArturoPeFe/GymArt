@@ -1,29 +1,9 @@
 <?php
 session_start();
-require('../src/conexion.php');
+require('../src/php/conexion.php');
 $_SESSION['credencialesErroneas'] = False;
-
-// Verificar si la sesión ha expirado
-if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
-    session_unset();
-    session_destroy();
-    header('Location: ../pages/acceso.php');
-}
-
-$_SESSION['timeout'] = time() + 600;
-
-//Obtener datos valoraciones
-$consulta = "CALL ObtenerValoraciones";
-$exec = $bdGym->prepare($consulta);
-
-try {
-    $exec->execute();
-} catch (PDOException $e) {
-    $error = true;
-    $mensaje = $e->getMessage();
-    $bdGym = null;
-}
-
+require('../src/php/validarSesion.php');
+require('../src/php/4pages/obtenerValoraciones.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -128,43 +108,9 @@ try {
         </div>
     </div>
 
-    <div id="valoraciones-container">
-        <!-- Aquí se mostrarán las valoraciones cargadas dinámicamente -->
-    </div>
-
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <!-- Enlaces de paginación Bootstrap -->
-        </ul>
-    </nav>
-
-    <script>
-        $(document).ready(function() {
-            // Función para cargar valoraciones de una página específica
-            function cargarValoraciones(pagina) {
-                $.ajax({
-                    url: 'cargar_valoraciones.php', // Ruta a un archivo PHP que recupera las valoraciones de la base de datos
-                    type: 'POST',
-                    data: {
-                        page: pagina
-                    }, // Envía el número de página a través de POST
-                    success: function(data) {
-                        $('#valoraciones-container').html(data);
-                    }
-                });
-            }
-
-            // Inicialmente, cargar la primera página de valoraciones
-            cargarValoraciones(1);
-
-            // Manejo de la paginación: escucha los clics en los enlaces de paginación
-            $('ul.pagination').on('click', 'a.page-link', function(e) {
-                e.preventDefault();
-                var pagina = $(this).text(); // Obtiene el número de página desde el enlace
-                cargarValoraciones(pagina);
-            });
-        });
-    </script>
+    <?php
+        
+    ?>
 
 </body>
 

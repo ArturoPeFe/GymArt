@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../src/conexion.php');
+require('../src/php/conexion.php');
 
 if (!isset($_SESSION['userT'])) {
     session_destroy();
@@ -8,57 +8,11 @@ if (!isset($_SESSION['userT'])) {
 }
 
 if (isset($_POST['borrar'])) {
-    $dni = $_POST['dni'];
-
-    $exec = $bdGym->prepare("CALL BorrarCliente(:dni)");
-
-    $exec->bindParam(':dni', $dni);
-
-    try {
-        $exec->execute();
-    } catch (PDOException $e) {
-        $error = true;
-        $mensaje = $e->getMessage();
-        $bdGym = null;
-    }
-
-    if (!$error) {
-        $mensaje = 'Cliente borrado con éxito';
-    }
+    require('../src/php/4priv/borrarCliente.php');
 }
 
 if (isset($_POST['modificar'])) {
-    $nombre = $_POST['nombre'];
-    $apellido1 = $_POST['apellido1'];
-    $apellido2 = $_POST['apellido2'];
-    $dni = $_POST['dni'];
-    $email = $_POST['emailN'];
-    $telefono = $_POST['telefono'];
-    $direccion = $_POST['direccion'];
-    $suscripcion = $_POST['suscripcion'];
-
-
-    $exec = $bdGym->prepare("CALL UpdateCliente(:dni,:nom,:ap1,:ap2,:email,:tel,:direccion,:suscripcion)");
-    $exec->bindParam(':dni', $dni);
-    $exec->bindParam(':nom', $nombre);
-    $exec->bindParam(':ap1', $apellido1);
-    $exec->bindParam(':ap2', $apellido2);
-    $exec->bindParam(':email', $email);
-    $exec->bindParam(':tel', $telefono);
-    $exec->bindParam(':direccion', $direccion);
-    $exec->bindParam(':suscripcion', $suscripcion);
-
-    try {
-        $exec->execute();
-    } catch (PDOException $e) {
-        $error = true;
-        $mensaje = $e->getMessage();
-        $bdGym = null;
-    }
-
-    if (!$error) {
-        $mensaje = 'Usuario actualizado';
-    }
+    require('../src/php/4priv/modificarCliente.php');
 }
 ?>
 <!DOCTYPE html>
@@ -85,7 +39,7 @@ if (isset($_POST['modificar'])) {
                     <h2 class="w700">Gym<span class="naranja">Art</span> Trabajadores</h2>
                 </a>
             </div>
-            <a href="../src/cerrarSesion.php" id="salir">Salir</a>
+            <a href="../src/php/cerrarSesion.php" id="salir">Salir</a>
         </div>
     </nav>
     <!-- Opciones... -->
@@ -136,37 +90,8 @@ if (isset($_POST['modificar'])) {
             } elseif (isset($_POST['opcion']) && $_POST['datoEntrada'] == '') {
                 echo '<p style="margin-top: 20px;text-align: center;color: red;">El valor introducido no es correcto</p>';
             } else {
-                if ($_POST['opcion'] == 'dni') {
-                    $dni = $_POST['datoEntrada'];
-                    $consulta = "SELECT * FROM clientes WHERE dni = :dni";
-                    $exec = $bdGym->prepare($consulta);
-                    $exec->bindParam(':dni', $dni);
+                require('../src/php/4priv/buscarCliente.php');
 
-                    try {
-                        $exec->execute();
-                    } catch (PDOException $e) {
-                        $error = true;
-                        $mensaje = $e->getMessage();
-                        $bdGym = null;
-                    }
-
-                    $datos = $exec->fetch(PDO::FETCH_OBJ);
-                } elseif ($_POST['opcion'] == 'email') {
-                    $email = $_POST['datoEntrada'];
-                    $consulta = "SELECT * FROM clientes WHERE email = :email";
-                    $exec = $bdGym->prepare($consulta);
-                    $exec->bindParam(':email', $email);
-
-                    try {
-                        $exec->execute();
-                    } catch (PDOException $e) {
-                        $error = true;
-                        $mensaje = $e->getMessage();
-                        $bdGym = null;
-                    }
-
-                    $datos = $exec->fetch(PDO::FETCH_OBJ);
-                }
                 if (!$datos) {
                     echo '<p style="margin-top: 20px;text-align: center; color: red;">El usuario no existe</p>';
                 }

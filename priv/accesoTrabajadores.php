@@ -1,45 +1,13 @@
 <?php
 session_start();
-require('../src/conexion.php');
-
-// Verificar si la sesión ha expirado
-if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
-    session_unset();
-    session_destroy();
-}
+require('../src/php/conexion.php');
+require('../src/php/validarSesion.php');
 
 if (isset($_SESSION['userT'])) {
     header('Location: datosClientes.php');
 } else {
     if (isset($_POST['dni'])) {
-        $dni = $_POST['dni'];
-        $pass = $_POST['pass'];
-
-        $consulta = "SELECT pass FROM contrasenas WHERE id_contrasena = (SELECT id_contrasena FROM trabajadores WHERE dni = :dni)";
-        $exec = $bdGym->prepare($consulta);
-        $exec->bindParam(':dni', $dni);
-
-        try {
-            $exec->execute();
-        } catch (PDOException $e) {
-            $error = true;
-            $mensaje = $e->getMessage();
-            $bdGym = null;
-        }
-
-        $passObtenida = $exec->fetch(PDO::FETCH_OBJ);
-
-        // Configuración del tiempo de vida de la sesión en segundos
-        $_SESSION['timeout'] = time() + 600;
-
-        if (password_verify($pass, $passObtenida->pass)) {
-            if (isset($_SESSION['credencialesErroneas']) && $_SESSION['credencialesErroneas'] == True) $_SESSION['credencialesErroneas'] = False;
-            $_SESSION['userT'] = $dni;
-            header('Location: datosClientes.php');
-        } else {
-            $_SESSION['credencialesErroneas'] = True;
-            header('Location: accesoTrabajadores.php');
-        }
+        require('../src/php/4priv/validarTrabajador.php');
     } else {
 ?>
 
@@ -65,7 +33,7 @@ if (isset($_SESSION['userT'])) {
                             <h2 class="w700">Gym<span class="naranja">Art</span> Trabajadores</h2>
                         </a>
                     </div>
-                    <a href="../src/cerrarSesion.php" id="salir">Salir</a>
+                    <a href="../src/php/cerrarSesion.php" id="salir">Salir</a>
                 </div>
             </nav>
             <div id="formAcceso">

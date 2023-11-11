@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../src/conexion.php');
+require('../src/php/conexion.php');
 
 if (!isset($_SESSION['userT'])) {
     session_destroy();
@@ -8,53 +8,11 @@ if (!isset($_SESSION['userT'])) {
 }
 
 if (isset($_POST['borrar'])) {
-    $dni = $_POST['dni'];
-
-    $exec = $bdGym->prepare("CALL BorrarTrabajador(:dni)");
-
-    $exec->bindParam(':dni', $dni);
-
-    try {
-        $exec->execute();
-    } catch (PDOException $e) {
-        $error = true;
-        $mensaje = $e->getMessage();
-        $bdGym = null;
-    }
-
-    if (!$error) {
-        $mensaje = 'Trabajador borrado con éxito';
-    }
+    require('../src/php/4priv/borrarTrabajador.php');
 }
 
 if (isset($_POST['modificar'])) {
-    $nombre = $_POST['nombre'];
-    $apellido1 = $_POST['apellido1'];
-    $apellido2 = $_POST['apellido2'];
-    $dni = $_POST['dni'];
-    $email = $_POST['emailN'];
-    $puesto = $_POST['puesto'];
-    $descripcion = $_POST['descripcion'];
-
-    $exec = $bdGym->prepare("CALL UpdateTrabajador(:dni,:nom,:ap1,:ap2,:email,:puesto,:descripcion)");
-    $exec->bindParam(':dni', $dni);
-    $exec->bindParam(':nom', $nombre);
-    $exec->bindParam(':ap1', $apellido1);
-    $exec->bindParam(':ap2', $apellido2);
-    $exec->bindParam(':email', $email);
-    $exec->bindParam(':puesto', $puesto);
-    $exec->bindParam(':descripcion', $descripcion);
-    try {
-        $exec->execute();
-    } catch (PDOException $e) {
-        $error = true;
-        $mensaje = $e->getMessage();
-        $bdGym = null;
-    }
-
-    if (!$error) {
-        $mensaje = 'Usuario actualizado';
-    }
+    require('../src/php/4priv/modificarTrabajador.php');
 }
 ?>
 <!DOCTYPE html>
@@ -81,7 +39,7 @@ if (isset($_POST['modificar'])) {
                     <h2 class="w700">Gym<span class="naranja">Art</span> Trabajadores</h2>
                 </a>
             </div>
-            <a href="../src/cerrarSesion.php" id="salir">Salir</a>
+            <a href="../src/php/cerrarSesion.php" id="salir">Salir</a>
         </div>
     </nav>
     <!-- Opciones... -->
@@ -132,37 +90,8 @@ if (isset($_POST['modificar'])) {
             } elseif (isset($_POST['opcion']) && $_POST['datoEntrada'] == '') {
                 echo '<p style="margin-top: 20px;text-align: center;color: red;">El valor introducido no es correcto</p>';
             } else {
-                if ($_POST['opcion'] == 'dni') {
-                    $dni = $_POST['datoEntrada'];
-                    $consulta = "SELECT * FROM trabajadores WHERE dni = :dni";
-                    $exec = $bdGym->prepare($consulta);
-                    $exec->bindParam(':dni', $dni);
+                require('../src/php/4priv/buscarTrabajador.php');
 
-                    try {
-                        $exec->execute();
-                    } catch (PDOException $e) {
-                        $error = true;
-                        $mensaje = $e->getMessage();
-                        $bdGym = null;
-                    }
-
-                    $datos = $exec->fetch(PDO::FETCH_OBJ);
-                } elseif ($_POST['opcion'] == 'email') {
-                    $email = $_POST['datoEntrada'];
-                    $consulta = "SELECT * FROM trabajadores WHERE email = :email";
-                    $exec = $bdGym->prepare($consulta);
-                    $exec->bindParam(':email', $email);
-
-                    try {
-                        $exec->execute();
-                    } catch (PDOException $e) {
-                        $error = true;
-                        $mensaje = $e->getMessage();
-                        $bdGym = null;
-                    }
-
-                    $datos = $exec->fetch(PDO::FETCH_OBJ);
-                }
                 if (!$datos) {
                     echo '<p style="margin-top: 20px;text-align: center; color: red;">El usuario no existe</p>';
                 }

@@ -1,68 +1,20 @@
 <?php
 session_start();
-require('../src/conexion.php');
 
 if (!isset($_SESSION['user'])) {
     session_destroy();
     header('Location: ../pages/acceso.php');
 }
 
-// Verificar si la sesión ha expirado
-if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
-    session_unset();
-    session_destroy();
-    header('Location: ../pages/acceso.php');
-}
+require('../src/php/conexion.php');
+require('../src/php/validarSesion.php');
 
 if (isset($_SESSION['user'])) {
-    $_SESSION['timeout'] = time() + 600;
-
-    $email = $_SESSION['user'];
-    $consulta = "SELECT * FROM clientes WHERE email = :email";
-    $exec = $bdGym->prepare($consulta);
-    $exec->bindParam(':email', $email);
-
-    try {
-        $exec->execute();
-    } catch (PDOException $e) {
-        $error = true;
-        $mensaje = $e->getMessage();
-        $bdGym = null;
-    }
-
-    $datos = $exec->fetch(PDO::FETCH_OBJ);
-
-    if (!isset($_SESSION['nombre'])) {
-        $_SESSION['nombre'] = $datos->nombre . ' ' . $datos->apellido1 . ' ' . $datos->apellido2;
-    }
+    require('../src/php/4pages/obtenerDatosCliente.php');
 }
-
 if (isset($_POST['cambiarPass'])) {
-    $dni = $_POST['dniN'];
-    $nuevaPass = $_POST['nuevaPass'];
-    $confirmarNuevaPass = $_POST['confirmarNuevaPass'];
-
-    if ($nuevaPass == $confirmarNuevaPass) {
-        $exec = $bdGym->prepare("CALL ActualizarPass(:dni,:nuevaPass)");
-        $exec->bindParam(':dni', $dni);
-        $exec->bindParam(':nuevaPass',password_hash($nuevaPass, PASSWORD_DEFAULT));
-
-        try {
-            $exec->execute();
-        } catch (PDOException $e) {
-            $error = true;
-            $mensaje = $e->getMessage();
-            $bdGym = null;
-        }
-
-        if (!$error) {
-            $mensaje = 'Contraseña actualizada';
-        }
-    } else {
-        $mensaje = "Las contraseñas no coinciden";
-    }
+    require('../src/php/4pages/cambiarPassCliente.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -208,7 +160,7 @@ if (isset($_POST['cambiarPass'])) {
                 </div>
             </div>
             <?php if (isset($mensaje)) echo '<p style="text-align: center;color: red;">' . $mensaje . '</p>'; ?>
-            <div id="divBoton"><button id="boton" onclick="cerrarSesion()"><a href="../src/cerrarSesion.php" id="cerrarSesion">Cerrar Sesión</a></button></div>
+            <div id="divBoton"><button id="boton" onclick="cerrarSesion()"><a href="../src/php/cerrarSesion.php" id="cerrarSesion">Cerrar Sesión</a></button></div>
             <!-- por si haces click en el boton pero fuera del <a> -->
             <script>
                 function cerrarSesion() {

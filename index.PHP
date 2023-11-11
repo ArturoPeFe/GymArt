@@ -1,28 +1,9 @@
 <?php
 session_start();
-require('./src/conexion.php');
 $_SESSION['credencialesErroneas'] = False;
-
-// Verificar si la sesión ha expirado
-if (isset($_SESSION['timeout']) && time() > $_SESSION['timeout']) {
-  session_unset();
-  session_destroy();
-}
-
-$_SESSION['timeout'] = time() + 600;
-
-//Obtener datos valoraciones
-$consulta = "CALL ObtenerValoraciones";
-$exec = $bdGym->prepare($consulta);
-
-try {
-  $exec->execute();
-} catch (PDOException $e) {
-  $error = true;
-  $mensaje = $e->getMessage();
-  $bdGym = null;
-}
-
+require('./src/php/conexion.php');
+require('./src/php/validarSesion.php');
+require('./src/php/4pages/obtenerValoraciones.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -44,87 +25,8 @@ try {
   <script src="https://kit.fontawesome.com/2eff857ffa.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-
-  <script>
-    // Función para comprobar si el div está visible
-    function isElementInViewport(elemento) {
-      const rect = elemento.getBoundingClientRect();
-
-      return (
-        rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-      );
-    }
-
-    // Función para actualizar la clase del menú-pc
-    function actualizarClaseMenuPc() {
-      const preciosDiv = document.getElementById("precios");
-      const inicioLink = document.querySelector("#opcionesMenu a[href='#inicio']");
-      const preciosLink = document.querySelector("#opcionesMenu a[href='#precios']");
-
-      if (isElementInViewport(preciosDiv)) {
-        inicioLink.classList.remove("pagActiva");
-        preciosLink.classList.add("pagActiva");
-      } else {
-        inicioLink.classList.add("pagActiva");
-        preciosLink.classList.remove("pagActiva");
-      }
-    }
-
-    // Función para actualizar la clase del menú-móvil
-    function actualizarClaseMenuMovil() {
-
-      const preciosDiv = document.getElementById("precios");
-
-      const inicioLinkMovil = document.querySelector("#opMM a[href='#inicio']");
-      const preciosLinkMovil = document.querySelector("#opMM a[href='#precios']");
-
-
-      if (isElementInViewport(preciosDiv)) {
-
-        inicioLinkMovil.classList.remove("naranja");
-        preciosLinkMovil.classList.add("naranja");
-
-      } else {
-
-        inicioLinkMovil.classList.add("naranja");
-        preciosLinkMovil.classList.remove("naranja");
-      }
-    }
-
-    // Escuchar eventos de scroll
-    window.addEventListener("scroll", function() {
-      actualizarClaseMenuPc();
-      actualizarClaseMenuMovil();
-    });
-
-    // Llamar a la función inicialmente para verificar la clase en la carga de la página
-    actualizarClaseMenuPc();
-    actualizarClaseMenuMovil();
-  </script>
-
-  <script>
-    //Para cerrar menú desplegable en móvil si se pulsa Inicio, Precios o Valoraciones
-    window.addEventListener("load", function() {
-      const a = document.getElementById("bInicio");
-      const b = document.getElementById("bPrecios");
-      const c = document.getElementById("bValoraciones");
-      const d = document.getElementById('cerrarMenu');
-
-      a.addEventListener("click", function() {
-        d.click();
-      });
-
-      b.addEventListener("click", function() {
-        d.click();
-      });
-
-      c.addEventListener("click", function() {
-        d.click();
-      });
-    });
-  </script>
-
+  <script src="./src/js/actualizaClases.js"></script>
+  <script src="./src/js/cerrarMenuDesplegable.js"></script>
 </head>
 
 <body>

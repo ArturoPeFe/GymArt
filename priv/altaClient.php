@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../src/conexion.php');
+require('../src/php/conexion.php');
 
 if (!isset($_SESSION['userT'])) {
     session_destroy();
@@ -8,36 +8,7 @@ if (!isset($_SESSION['userT'])) {
 }
 
 if (isset($_POST['crear'])) {
-    $nombre = $_POST['nombre'];
-    $apellido1 = $_POST['apellido1'];
-    $apellido2 = $_POST['apellido2'];
-    $dni = $_POST['dni'];
-    $email = $_POST['email'];
-    $telefono = $_POST['telefono'];
-    $direccion = $_POST['direccion'];
-    $suscripcion = $_POST['suscripcion'];
-
-    $exec = $bdGym->prepare("CALL InsertarCliente(:dni,:nom,:ap1,:ap2,:email,:tel,:direccion,:suscripcion,:pass)");
-
-    $exec->bindParam(':dni', $dni);
-    $exec->bindParam(':nom', $nombre);
-    $exec->bindParam(':ap1', $apellido1);
-    $exec->bindParam(':ap2', $apellido2);
-    $exec->bindParam(':email', $email);
-    $exec->bindParam(':tel', $telefono);
-    $exec->bindParam(':direccion', $direccion);
-    $exec->bindParam(':suscripcion', $suscripcion);
-    $exec->bindParam(':pass', password_hash($dni, PASSWORD_DEFAULT));
-
-    try {
-        $exec->execute();
-    } catch (PDOException $e) {
-        $error = true;
-        $mensaje = $e->getMessage();
-        $bdGym = null;
-    }
-
-    if(!$error){$mensaje='Cliente registrado con éxito';}
+    require('../src/php/4priv/crearCliente.php');
 }
 ?>
 <!DOCTYPE html>
@@ -62,7 +33,7 @@ if (isset($_POST['crear'])) {
                     <h2 class="w700">Gym<span class="naranja">Art</span> Trabajadores</h2>
                 </a>
             </div>
-            <a href="../src/cerrarSesion.php" id="salir">Salir</a>
+            <a href="../src/php/cerrarSesion.php" id="salir">Salir</a>
         </div>
     </nav>
     <!-- Opciones... -->
