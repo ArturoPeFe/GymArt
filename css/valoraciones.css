@@ -83,4 +83,10 @@
     #mapa iframe{
         height: 300px;
     }
+
+    #tuValoracion{
+        width: 80%;
+        margin: auto;
+        justify-content: center;
+    }
 }

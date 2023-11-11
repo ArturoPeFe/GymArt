@@ -9,6 +9,7 @@ if (isset($_POST['valorar']) && !isset($_SESSION['user'])) {
     header('Location: ../pages/acceso.php');
 } else if (isset($_POST['valorar']) && isset($_SESSION['user'])) {
     require('../src/php/4pages/hacerValoracion.php');
+    header('Location: ../pages/valoraciones.php?pagina=1');
 }
 ?>
 <!DOCTYPE html>
@@ -65,7 +66,7 @@ if (isset($_POST['valorar']) && !isset($_SESSION['user'])) {
     <!-- Menú de móvil -->
     <nav id="menuMovil" class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand w700" href="./">Gym<span class="naranja">Art</span></a>
+            <a class="navbar-brand w700" href="../">Gym<span class="naranja">Art</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -84,7 +85,7 @@ if (isset($_POST['valorar']) && !isset($_SESSION['user'])) {
                 <div class="offcanvas-body" id="opMM">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="../#inicio" id="bInicio">Inicio</a>
+                            <a class="nav-link text-center" href="../" id="bInicio">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-center" href="../#precios" id="bPrecios">Precios</a>
@@ -114,8 +115,6 @@ if (isset($_POST['valorar']) && !isset($_SESSION['user'])) {
         </div>
     </div>
 
-    <div id="mensaje"><?php if (isset($mensaje)) echo '<p style="text-align: center;color: red; margin-top: 20px">' . $mensaje . '</p>'; ?></div>
-
     <div id="valoraciones">
         <?php
         $i = True;
@@ -141,13 +140,10 @@ if (isset($_POST['valorar']) && !isset($_SESSION['user'])) {
             $totalValoraciones = 5;
             $totalPaginas = ceil($totalValoraciones / $valoracionesPorPagina);
 
-            if (isset($mensaje)) {
-                echo "<a style='min-width:35px; margin:0px 5px;' class='btn btn-secondary' href='../pages/valoraciones.php'><span>Ver valoraciones</span></a>";
-            } else {
-                for ($i = 1; $i <= $totalPaginas; $i++) {
-                    echo "<a style='min-width:35px; border-radius:20px; margin:0px 5px;' class='btn btn-secondary' href='?pagina=" . $i . "'><span>" . $i . "</span></a>";
-                }
+            for ($i = 1; $i <= $totalPaginas; $i++) {
+                echo "<a style='min-width:35px; border-radius:20px; margin:0px 5px;' class='btn btn-secondary' href='?pagina=" . $i . "'><span>" . $i . "</span></a>";
             }
+
             ?>
         </div>
     </div>
@@ -167,7 +163,6 @@ if (isset($_POST['valorar']) && !isset($_SESSION['user'])) {
                     <div id="aviso" class="form-text">Si ya has valorado antes, se actualizará dicha valoración</div>
                 </div>
                 <button type="submit" class="btn btn-primary" id="valorar" name="valorar">Valorar</button>
-                <a hidden href="?pagina=1"></a>
             </form><br>
         </div>
     </div>
