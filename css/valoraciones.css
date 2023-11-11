@@ -28,3 +28,45 @@
     font-weight: 700;
     font-size: 60px;
 }
+
+#valoraciones{
+    width: 70%;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+#paginacion{
+    width: max-content;
+    margin: auto;
+}
+
+@media screen and (max-width: 1100px) {
+
+    #mensPrincipal div {
+        width: 70vw;
+        margin: auto;
+    }
+
+    #mensPrincipal h1 {
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+}
+
+@media screen and (max-width: 499px) {
+    
+    #mensPrincipal div {
+        width: 250px;
+        margin: auto;
+    }
+
+    #mensPrincipal h1 {
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+    #mapa iframe{
+        height: 300px;
+    }
+}

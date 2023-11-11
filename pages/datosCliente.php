@@ -18,6 +18,7 @@ if (isset($_POST['cambiarPass'])) {
 ?>
 
 <!DOCTYPE html>
+<html lang="es">
 
 <head>
     <title>Datos Usuario</title>
@@ -173,16 +174,16 @@ if (isset($_POST['cambiarPass'])) {
 
     <footer id="footerDatos">
         <div id="redes">
-            <a href="#"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
-            <a href="#"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
-            <a href="#"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
+            <a title="instagram" href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
+            <a title="facebook" href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
+            <a title="twitter" href="https://twitter.com/"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
         </div>
         <div id="infoFooter">
             <h3>GymArt</h3>
             <p>988 123 456</p>
             <p>info@ejemplocorreo.com</p>
             <p>Calle de la calle, 22 - 32003 Ourense</p>
-            <p><a href="#">Aviso Legal</a></p>
+            <p><a>Aviso Legal</a></p>
             <a href="../priv/accesoTrabajadores.php">Acceso Trabajadores</a>
         </div>
     </footer>

@@ -5,7 +5,7 @@ require('../src/php/validarSesion.php');
 require('../src/php/4pages/obtenerDatosTrabajadores.php');
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <title>Contacto</title>
@@ -119,9 +119,9 @@ require('../src/php/4pages/obtenerDatosTrabajadores.php');
                             <img src="../assets/img/monigote.png" class="img-fluid rounded-start" alt="monigote">
                         </div>
                         <div class="col-md-8">
-                        <h3 class="card-header w700"><?php echo $datos->nombre . ' ' . $datos->apellido1 ?></h3>
+                            <h3 class="card-header w700"><?php echo $datos->nombre . ' ' . $datos->apellido1 ?></h3>
                             <div class="card-body">
-                            <h5 class="card-title naranja"><?php echo $datos->puesto ?></h5>
+                                <h5 class="card-title naranja"><?php echo $datos->puesto ?></h5>
                                 <p class="card-text"><?php echo $datos->descripcion_puesto ?></p>
                             </div>
                         </div>
@@ -135,16 +135,16 @@ require('../src/php/4pages/obtenerDatosTrabajadores.php');
 
     <footer id="footerDatos">
         <div id="redes">
-            <a href="#"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
-            <a href="#"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
-            <a href="#"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
+            <a title="instagram" href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
+            <a title="facebook" href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
+            <a title="twitter" href="https://twitter.com/"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
         </div>
         <div id="infoFooter">
             <h3>GymArt</h3>
             <p>988 123 456</p>
             <p>info@ejemplocorreo.com</p>
             <p>Calle de la calle, 22 - 32003 Ourense</p>
-            <p><a href="#">Aviso Legal</a></p>
+            <p><a>Aviso Legal</a></p>
             <a href="../priv/accesoTrabajadores.php">Acceso Trabajadores</a>
         </div>
     </footer>

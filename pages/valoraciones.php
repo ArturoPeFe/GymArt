@@ -3,7 +3,7 @@ session_start();
 require('../src/php/conexion.php');
 $_SESSION['credencialesErroneas'] = False;
 require('../src/php/validarSesion.php');
-require('../src/php/4pages/obtenerValoraciones.php');
+require('../src/php/4pages/paginarValoraciones.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,8 +19,8 @@ require('../src/php/4pages/obtenerValoraciones.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/2eff857ffa.js" crossorigin="anonymous"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -29,13 +29,13 @@ require('../src/php/4pages/obtenerValoraciones.php');
     <nav id="menuPc">
         <div id="menu">
             <div id="logo">
-                <a href="./">
+                <a href="../">
                     <h2 class="w700">Gym<span class="naranja">Art</span></h2>
                 </a>
             </div>
             <div id="opcionesMenu">
                 <ul>
-                    <li><a href="../#inicio">Inicio </a> </li>
+                    <li><a href="../">Inicio </a> </li>
                     <li><a href="../#precios">Precios</a></li>
                     <li><a class="pagActiva" href="../pages/valoraciones.php">Valoraciones</a></li>
                     <li><a href="../pages/miembros.php">Miembros</a></li>
@@ -107,10 +107,52 @@ require('../src/php/4pages/obtenerValoraciones.php');
             <h1>Valoraciones de nuestros clientes</h1>
         </div>
     </div>
+    <div id="valoraciones">
+        <?php
+        $i = True;
+        while ($i == True) {
+            if ($datos = $exec->fetch(PDO::FETCH_OBJ)) {
+        ?>
+                <div class="card mb-3" style="margin: 40px 0px;">
+                    <div class="row g-0">
+                        <div class="col">
+                            <h3 class="card-header w700"><?php echo $datos->nombre ?></h3>
+                            <div class="card-body">
+                                <p class="card-text"><?php echo $datos->comentario ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <?php
+            } else $i = False;
+        } ?>
+        <div id="paginacion">
+            <?php
+            // Muestra controles de paginación
+            $totalValoraciones = 5;
+            $totalPaginas = ceil($totalValoraciones / $valoracionesPorPagina);
 
-    <?php
-        
-    ?>
+            for ($i = 1; $i <= $totalPaginas; $i++) {
+                echo "<a style='min-width:35px; border-radius:20px; margin:0px 5px;' class='btn btn-secondary' href='?pagina=" . $i . "'><span>" . $i . "</span></a>";
+            }
+            ?>
+        </div>
+    </div>
+    <footer id="footerDatos">
+        <div id="redes">
+            <a title="instagram" href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
+            <a title="facebook" href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
+            <a title="twitter" href="https://twitter.com/"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
+        </div>
+        <div id="infoFooter">
+            <h3>GymArt</h3>
+            <p>988 123 456</p>
+            <p>info@ejemplocorreo.com</p>
+            <p>Calle de la calle, 22 - 32003 Ourense</p>
+            <p><a>Aviso Legal</a></p>
+            <a href="../priv/accesoTrabajadores.php">Acceso Trabajadores</a>
+        </div>
+    </footer>
 
 </body>
 

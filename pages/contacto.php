@@ -3,7 +3,7 @@ session_start();
 require('../src/php/validarSesion.php');
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <title>Contacto</title>
@@ -117,21 +117,21 @@ require('../src/php/validarSesion.php');
     </div>
 
     <div id="mapa">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11798.175935803689!2d-7.8744937!3d42.3309242!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2ff932917ad993%3A0x5143d80e114ada98!2sC.I.F.P%20A%20Carballeira!5e0!3m2!1ses!2ses!4v1698603128050!5m2!1ses!2ses" width="900" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe title="mapa del sitio" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11798.175935803689!2d-7.8744937!3d42.3309242!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2ff932917ad993%3A0x5143d80e114ada98!2sC.I.F.P%20A%20Carballeira!5e0!3m2!1ses!2ses!4v1698603128050!5m2!1ses!2ses" width="900" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <footer id="footerDatos">
         <div id="redes">
-            <a href="#"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
-            <a href="#"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
-            <a href="#"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
+            <a title="instagram" href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram fa-2xl"></i></a>
+            <a title="facebook" href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook fa-2xl"></i></a>
+            <a title="twitter" href="https://twitter.com/"><i class="fa-brands fa-square-x-twitter fa-2xl"></i></a>
         </div>
         <div id="infoFooter">
             <h3>GymArt</h3>
             <p>988 123 456</p>
             <p>info@ejemplocorreo.com</p>
             <p>Calle de la calle, 22 - 32003 Ourense</p>
-            <p><a href="#">Aviso Legal</a></p>
+            <p><a>Aviso Legal</a></p>
             <a href="../priv/accesoTrabajadores.php">Acceso Trabajadores</a>
         </div>
     </footer>
