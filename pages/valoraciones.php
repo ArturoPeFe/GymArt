@@ -137,7 +137,6 @@ if (isset($_POST['valorar']) && !isset($_SESSION['user'])) {
         <div id="paginacion">
             <?php
             // Muestra controles de paginación
-            $totalValoraciones = 5;
             $totalPaginas = ceil($totalValoraciones / $valoracionesPorPagina);
 
             for ($i = 1; $i <= $totalPaginas; $i++) {
