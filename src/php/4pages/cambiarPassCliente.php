@@ -16,10 +16,4 @@ if ($nuevaPass == $confirmarNuevaPass) {
         $mensaje = $e->getMessage();
         $bdGym = null;
     }
-
-    if (!$error) {
-        $mensaje = 'Contraseña actualizada';
-    }
-} else {
-    $mensaje = "Las contraseñas no coinciden";
 }

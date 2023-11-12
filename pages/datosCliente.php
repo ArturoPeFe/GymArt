@@ -34,6 +34,21 @@ if (isset($_POST['cambiarPass'])) {
     <script src="https://kit.fontawesome.com/2eff857ffa.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        function validarPass() {
+
+            let pass1 = document.getElementById('nuevaPass').value;
+            let pass2 = document.getElementById('confirmarNuevaPass').value;
+            let mensError = document.getElementById('mensError');
+
+            if (pass1 != pass2) {
+                mensError.innerHTML = "Las contraseñas no coinciden";
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -143,7 +158,7 @@ if (isset($_POST['cambiarPass'])) {
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body text-center">
-                                <form id="modifPass" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                                <form id="modifPass" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" onsubmit="return validarPass()">
                                     <input hidden id="dniN" name="dniN" value="<?php echo "{$datos->dni}"; ?>">
                                     <div class="mb-2">
                                         <label for="nuevaPass" class="form-label">Nueva contraseña</label>
@@ -153,6 +168,7 @@ if (isset($_POST['cambiarPass'])) {
                                         <label for="confirmarNuevaPass" class="form-label">Confirmar contraseña</label>
                                         <input type="password" class="form-control" id="confirmarNuevaPass" name="confirmarNuevaPass">
                                     </div>
+                                    <p id="mensError" style="color: red;"></p>
                                     <button type="submit" class="btn btn-primary" id="cambiarPass" name="cambiarPass">Confirmar</button>
                                 </form>
                             </div>
@@ -160,7 +176,7 @@ if (isset($_POST['cambiarPass'])) {
                     </div>
                 </div>
             </div>
-            <?php if (isset($mensaje)) echo '<p style="text-align: center;color: red;">' . $mensaje . '</p>'; ?>
+
             <div id="divBoton"><button id="boton" onclick="cerrarSesion()"><a href="../src/php/cerrarSesion.php" id="cerrarSesion">Cerrar Sesión</a></button></div>
             <!-- por si haces click en el boton pero fuera del <a> -->
             <script>
