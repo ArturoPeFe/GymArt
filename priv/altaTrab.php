@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../src/conexion.php');
+require('../src/php/conexion.php');
 
 if (!isset($_SESSION['userT'])) {
     session_destroy();
