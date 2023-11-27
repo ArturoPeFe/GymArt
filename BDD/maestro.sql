@@ -1,0 +1,1 @@
+CALL InsertarTrabajador('12345678A','Master','Master','Master','master@ex.com','None','None','12345678A')
